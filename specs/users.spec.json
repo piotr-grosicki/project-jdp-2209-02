@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "username": "Piotr",
+        "status": "1",
+        "userKey": 59403
+    },
+    {
+        "id": 2,
+        "username": "Admin",
+        "status": "1",
+        "userKey": 96997
+    },
+    {
+        "id": 3,
+        "username": "User",
+        "status": "0",
+        "userKey": 31251
+    }
+]
