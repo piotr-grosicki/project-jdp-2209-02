@@ -28,4 +28,9 @@ public class ProductController {
         System.out.println("updating product");
         return ResponseEntity.ok().build();
     }
+    @DeleteMapping
+    public ResponseEntity<Void> deleteProduct(){
+        System.out.println("delete product");
+        return ResponseEntity.ok().build();
+    }
 }
