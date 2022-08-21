@@ -1,2 +1,14 @@
-package com.kodilla.ecommercee.domain;public class Group {
+package com.kodilla.ecommercee.domain;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+public class Group {
+    private long id;
+    private String name;
+    private String description;
 }
