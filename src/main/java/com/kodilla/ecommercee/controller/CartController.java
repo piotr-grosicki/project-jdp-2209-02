@@ -51,8 +51,7 @@ public class CartController {
         ProductDto productDto = new ProductDto(1L,"productName","productDescription",1000);
         CartDto cartDto = new CartDto(cartId,1L,1L,productDtoList);
         cartDto.getProductDtoList().add(productDto);
-        UserDto userDto = new UserDto(1L, "Login15", "mail@mail.com", "Adress 1", false, 123L);
 
-        new OrderDto(1L,userDto,cartDto, LocalDate.now(),true,new BigDecimal(22.10),productDtoList);
+        new OrderDto(1L, 1L , 1L ,true,new BigDecimal(22.10),productDtoList);
     }
 }

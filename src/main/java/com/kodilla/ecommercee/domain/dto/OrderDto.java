@@ -14,17 +14,17 @@ import java.util.List;
 @NoArgsConstructor
 public class OrderDto {
     private long id;
-    private UserDto userDto;
-    private CartDto cartDto;
+    private long userId;
+    private long cartId;
     private LocalDate orderDate;
     private boolean isPaid;
     private BigDecimal totalPrice;
     private List<ProductDto> productDtoList;
 
-    public OrderDto(long id, UserDto userDto, CartDto cartDto,  boolean isPaid, BigDecimal totalPrice, List<ProductDto> productDtoList) {
+    public OrderDto(long id, long userId, long cartId,  boolean isPaid, BigDecimal totalPrice, List<ProductDto> productDtoList) {
         this.id = id;
-        this.userDto = userDto;
-        this.cartDto = cartDto;
+        this.userId = userId;
+        this.cartId = cartId;
         this.orderDate = LocalDate.now();
         this.isPaid = isPaid;
         this.totalPrice = totalPrice;
