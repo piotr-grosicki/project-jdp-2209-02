@@ -1,7 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
 
-import com.kodilla.ecommercee.domain.GroupDto;
+import com.kodilla.ecommercee.domain.dto.GroupsDto;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,22 +13,22 @@ import java.util.List;
 public class GroupController {
 
     @GetMapping
-    public List<GroupDto> getGroups() {
+    public List<GroupsDto> getGroups() {
         return new ArrayList<>();
     }
 
     @GetMapping(value = "{groupId}")
-    public GroupDto getGroupById(@PathVariable Long groupId) {
-        return new GroupDto(1L,"group name","group description");
+    public GroupsDto getGroupById(@PathVariable Long groupId) {
+        return new GroupsDto(1L,"group name","group description");
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createGroup(@RequestBody GroupDto groupDto) {
+    public void createGroup(@RequestBody GroupsDto groupDto) {
 
     }
 
     @PutMapping
-    public GroupDto updateGroup(@RequestBody GroupDto groupDto) {
-        return new GroupDto(1L,"Updated group name","Updated group description");
+    public GroupsDto updateGroup(@RequestBody GroupsDto groupDto) {
+        return new GroupsDto(1L,"Updated group name","Updated group description");
     }
 }
