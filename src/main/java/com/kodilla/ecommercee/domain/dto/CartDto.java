@@ -4,12 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
+import java.util.ArrayList;
+import java.util.List;
 
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class GroupDto {
+public class CartDto {
     private long id;
-    private String name;
-    private String description;
+    private long userId;
+    private long orderId;
+    private List<ProductDto> productDtoList;
 }
