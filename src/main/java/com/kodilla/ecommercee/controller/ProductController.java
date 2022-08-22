@@ -1,7 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
 
-import com.kodilla.ecommercee.domain.dto.GroupsDto;
+import com.kodilla.ecommercee.domain.dto.GroupDto;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
@@ -24,7 +24,7 @@ public class ProductController {
                         "laptop Lenovo",
                         "jest super",
                         1999.99F,
-                        new GroupsDto(1L, "Laptopy", "komputery")
+                        new GroupDto(1L, "Laptopy", "komputery")
                 )
         );
         products.add(
@@ -32,7 +32,7 @@ public class ProductController {
                         "Mysz Dell",
                         "jest super",
                         1999.99F,
-                        new GroupsDto(2L, "części", "elektronika")
+                        new GroupDto(2L, "części", "elektronika")
                 )
         );
         return ResponseEntity.ok(products);
@@ -46,7 +46,7 @@ public class ProductController {
                         "laptop Lenovo",
                         "jest super",
                         1999.99F,
-                        new GroupsDto(1L, "Laptopy", "komputery")
+                        new GroupDto(1L, "Laptopy", "komputery")
                 )
         );
     }
@@ -68,7 +68,7 @@ public class ProductController {
                         "laptop Lenovo",
                         "jest super",
                         1999.99F,
-                        new GroupsDto(1L, "Laptopy", "komputery")
+                        new GroupDto(1L, "Laptopy", "komputery")
                 )
         );
     }

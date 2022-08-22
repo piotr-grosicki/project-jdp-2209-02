@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GroupsDto {
+public class GroupDto {
     private Long id;
     private String name;
     private String description;

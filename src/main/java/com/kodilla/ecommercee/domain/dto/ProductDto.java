@@ -12,5 +12,5 @@ public class ProductDto {
     private String name;
     private String description;
     private float price;
-    private GroupsDto groupDto;
+    private GroupDto groupDto;
 }
