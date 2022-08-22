@@ -7,10 +7,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductDto {
+public class GroupsDto {
     private Long id;
     private String name;
     private String description;
-    private float price;
-    private GroupsDto groupDto;
 }
