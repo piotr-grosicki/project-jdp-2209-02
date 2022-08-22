@@ -1,6 +1,5 @@
 package com.kodilla.ecommercee.domain;
 
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
