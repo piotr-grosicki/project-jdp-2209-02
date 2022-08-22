@@ -1,6 +1,6 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.Group;
+import com.kodilla.ecommercee.domain.dto.GroupsDto;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
@@ -18,8 +18,22 @@ public class ProductController {
     public ResponseEntity<List<ProductDto>> getProducts() {
         System.out.println("get all products");
         List<ProductDto> products = new ArrayList<>();
-        products.add(new ProductDto(1L, "laptop Lenovo", "jest super", 1999.99F, new Group(1L, "Laptopy", "komputery")));
-        products.add(new ProductDto(2L, "Mysz Dell", "jest super", 1999.99F, new Group(2L, "części", "elektronika")));
+        products.add(
+                new ProductDto(1L,
+                        "laptop Lenovo",
+                        "jest super",
+                        1999.99F,
+                        new GroupsDto(1L, "Laptopy", "komputery")
+                )
+        );
+        products.add(
+                new ProductDto(2L,
+                        "Mysz Dell",
+                        "jest super",
+                        1999.99F,
+                        new GroupsDto(2L, "części", "elektronika")
+                )
+        );
         return ResponseEntity.ok(products);
     }
 
@@ -27,7 +41,12 @@ public class ProductController {
     public ResponseEntity<ProductDto> getProduct(@PathVariable Long productId) {
         System.out.println("get one product with id=" + productId);
         return ResponseEntity.ok(
-                new ProductDto(1L, "laptop Lenovo", "jest super", 1999.99F, new Group(1L, "Laptopy", "komputery"))
+                new ProductDto(1L,
+                        "laptop Lenovo",
+                        "jest super",
+                        1999.99F,
+                        new GroupsDto(1L, "Laptopy", "komputery")
+                )
         );
     }
 
@@ -44,7 +63,12 @@ public class ProductController {
     public ResponseEntity<ProductDto> updateProduct() {
         System.out.println("updating product");
         return ResponseEntity.ok(
-                new ProductDto(1L, "laptop Lenovo", "jest super", 1999.99F, new Group(1L, "Laptopy", "komputery"))
+                new ProductDto(1L,
+                        "laptop Lenovo",
+                        "jest super",
+                        1999.99F,
+                        new GroupsDto(1L, "Laptopy", "komputery")
+                )
         );
     }
 
