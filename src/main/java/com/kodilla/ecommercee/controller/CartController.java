@@ -1,11 +1,13 @@
 package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.domain.UserDto;
 import com.kodilla.ecommercee.domain.dto.CartDto;
 import com.kodilla.ecommercee.domain.dto.OrderDto;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +51,8 @@ public class CartController {
         ProductDto productDto = new ProductDto(1L,"productName","productDescription",1000);
         CartDto cartDto = new CartDto(cartId,1L,1L,productDtoList);
         cartDto.getProductDtoList().add(productDto);
-        new OrderDto(1L,1L,1L, LocalDate.now(),true,1000,productDtoList);
+        UserDto userDto = new UserDto(1L, "Login15", "mail@mail.com", "Adress 1", false, 123L);
+
+        new OrderDto(1L,userDto,cartDto, LocalDate.now(),true,new BigDecimal(22.10),productDtoList);
     }
 }
