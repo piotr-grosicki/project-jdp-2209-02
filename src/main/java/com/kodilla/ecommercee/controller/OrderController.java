@@ -2,12 +2,10 @@ package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.dto.CartDto;
 import com.kodilla.ecommercee.domain.dto.OrderDto;
-import com.kodilla.ecommercee.domain.UserDto;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
