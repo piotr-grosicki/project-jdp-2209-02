@@ -10,19 +10,19 @@ import javax.validation.constraints.NotNull;
 @Table(name = "CARTS")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Carts {
+public class Cart {
 
     @Id
     @GeneratedValue
     @NotNull
     @Column(name = "Id", unique = true)
-    private int id;
+    private long id;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name= "USERS_ID")
-    private Users id_user;
+    private User user;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name= "ORDERS_ID")
-    private Orders id_order;
+    private Order order;
 }

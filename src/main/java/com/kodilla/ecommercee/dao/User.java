@@ -10,12 +10,12 @@ import javax.validation.constraints.NotNull;
 @Table(name = "USERS")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Users {
+public class User {
 
     @Id
     @GeneratedValue
     @NotNull
     @Column(name = "Id", unique = true)
-    private int id;
+    private long id;
 
 }
