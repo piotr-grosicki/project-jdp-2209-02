@@ -23,18 +23,14 @@ public class ProductController {
                 new ProductDto(1L,
                         "laptop Lenovo",
                         "jest super",
-                        1999.99F,
-                        new GroupDto(1L, "Laptopy", "komputery")
-                )
-        );
+                        1999.99F
+        ));
         products.add(
                 new ProductDto(2L,
                         "Mysz Dell",
                         "jest super",
-                        1999.99F,
-                        new GroupDto(2L, "części", "elektronika")
-                )
-        );
+                        1999.99F
+        ));
         return ResponseEntity.ok(products);
     }
 
@@ -45,10 +41,8 @@ public class ProductController {
                 new ProductDto(1L,
                         "laptop Lenovo",
                         "jest super",
-                        1999.99F,
-                        new GroupDto(1L, "Laptopy", "komputery")
-                )
-        );
+                        1999.99F
+        ));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -67,10 +61,8 @@ public class ProductController {
                 new ProductDto(1L,
                         "laptop Lenovo",
                         "jest super",
-                        1999.99F,
-                        new GroupDto(1L, "Laptopy", "komputery")
-                )
-        );
+                        1999.99F
+        ));
     }
 
     @DeleteMapping("{productId}")
