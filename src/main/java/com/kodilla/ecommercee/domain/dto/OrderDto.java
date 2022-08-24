@@ -16,6 +16,4 @@ public class OrderDto {
     private long cartId;
     private LocalDate orderDate;
     private boolean isPaid;
-    private double totalPrice;
-    private List<ProductDto> productDtoList;
 }

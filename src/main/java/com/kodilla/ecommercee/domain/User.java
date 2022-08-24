@@ -10,21 +10,22 @@ import javax.validation.constraints.NotNull;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "user")
+@Entity(name = "USER")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     @Column(name = "ID", unique = true)
     private Long id;
-    @Column(name = "login")
+    @Column(name = "LOGIN")
     private String login;
-    @Column(name = "mail")
+    @Column(name = "MAIL")
     private String mail;
-    @Column(name = "address")
+    @Column(name = "ADDRESS")
     private String address;
-    @Column(name = "is_blocked")
+    @Column(name = "IS_BLOCKED")
     private boolean isBlocked;
 }
+
 
 
