@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
@@ -13,6 +14,8 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
+    @Column(name = "ID", unique = true)
     private Long id;
     @Column(name = "login")
     private String login;
@@ -23,3 +26,5 @@ public class User {
     @Column(name = "is_blocked")
     private boolean isBlocked;
 }
+
+
