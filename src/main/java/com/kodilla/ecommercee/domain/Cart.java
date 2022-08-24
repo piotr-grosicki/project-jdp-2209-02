@@ -23,4 +23,12 @@ public class Cart {
 
     @ManyToMany(cascade = CascadeType.ALL,mappedBy = "carts")
     private List<Product> products;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name= "USERS_ID")
+    private User user;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name= "ORDERS_ID")
+    private Order order;
 }
