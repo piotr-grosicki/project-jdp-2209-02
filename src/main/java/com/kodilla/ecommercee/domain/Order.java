@@ -1,37 +1,44 @@
 package com.kodilla.ecommercee.domain;
 
-import com.kodilla.ecommercee.domain.dto.ProductDto;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @NoArgsConstructor
-@Getter
+@Data
 @AllArgsConstructor
-@Entity(name = "orders")
+@Entity(name = "ORDERS")
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
+    @NotNull
+    @Column(name = "ID", unique = true)
     private long id;
 
-    @Column(name = "userId")
-    private long userId;
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private User user;
 
-    @Column(name = "cartId")
-    private long cartId;
-
-    @Column(name = "orderDate")
+    @NotNull
+    @Column(name = "ORDER_DATE")
     private LocalDate orderDate;
 
-    @Column(name = "isPaid")
+    @NotNull
+    @Column(name = "IS_PAID")
     private boolean isPaid;
 
-    @Column(name = "totalPrice")
+    @NotNull
+    @Column(name = "ORDER_STATUS")
+    private String orderStatus;
+
+    @NotNull
+    @Column(name = "TOTAL_PRICE")
     private BigDecimal totalPrice;
 
 }

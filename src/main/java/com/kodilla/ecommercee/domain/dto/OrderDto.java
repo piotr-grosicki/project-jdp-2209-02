@@ -1,6 +1,5 @@
 package com.kodilla.ecommercee.domain.dto;
 
-import com.kodilla.ecommercee.domain.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +20,7 @@ public class OrderDto {
     private BigDecimal totalPrice;
     private List<ProductDto> productDtoList;
 
-    public OrderDto(long id, long userId, long cartId,  boolean isPaid, BigDecimal totalPrice, List<ProductDto> productDtoList) {
+    public OrderDto(long id, long userId, long cartId, boolean isPaid, BigDecimal totalPrice, List<ProductDto> productDtoList) {
         this.id = id;
         this.userId = userId;
         this.cartId = cartId;
