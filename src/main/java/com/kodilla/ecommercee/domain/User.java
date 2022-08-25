@@ -43,8 +43,7 @@ public class User {
             fetch = FetchType.LAZY
     )
     private List<Order> orders;
-    @OneToOne
-    private Cart cart;
+
 }
 
 

@@ -6,12 +6,13 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
+@AllArgsConstructor
 @Entity(name = "ORDERS")
-
 public class Order {
 
     @Id
@@ -19,8 +20,29 @@ public class Order {
     @NotNull
     @Column(name = "ID", unique = true)
     private long id;
+
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "USER_ID")
     private User user;
+
+    @NotNull
+    @Column(name = "ORDER_DATE")
+    private LocalDate orderDate;
+
+    @NotNull
+    @Column(name = "IS_PAID")
+    private boolean isPaid;
+
+    @NotNull
+    @Column(name = "ORDER_STATUS")
+    private String orderStatus;
+
+    @NotNull
+    @Column(name = "TOTAL_PRICE")
+    private BigDecimal totalPrice;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name= "CART_ID")
+    private Cart cart;
 
 }
