@@ -24,13 +24,19 @@ public class ProductController {
                         "laptop Lenovo",
                         "jest super",
                         1999.99F
-        ));
+
+                )
+        );
+
         products.add(
                 new ProductDto(2L,
                         "Mysz Dell",
                         "jest super",
                         1999.99F
-        ));
+
+                )
+        );
+
         return ResponseEntity.ok(products);
     }
 
@@ -42,7 +48,10 @@ public class ProductController {
                         "laptop Lenovo",
                         "jest super",
                         1999.99F
-        ));
+
+                )
+        );
+
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -62,7 +71,10 @@ public class ProductController {
                         "laptop Lenovo",
                         "jest super",
                         1999.99F
-        ));
+
+                )
+        );
+
     }
 
     @DeleteMapping("{productId}")
