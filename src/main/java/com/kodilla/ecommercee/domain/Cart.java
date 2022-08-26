@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,6 +20,9 @@ public class Cart {
     @NotNull
     @Column(name = "ID", unique = true)
     private long id;
+
+    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "carts")
+    private List<Product> products;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name= "USERS_ID")
