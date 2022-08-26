@@ -17,7 +17,7 @@ public class Order {
 
     @Id
     @GeneratedValue
-    @NotNull
+//    @NotNull
     @Column(name = "ID", unique = true)
     private long id;
 
@@ -45,4 +45,10 @@ public class Order {
     @JoinColumn(name= "CART_ID")
     private Cart cart;
 
+    public Order(LocalDate orderDate, boolean isPaid, String orderStatus, BigDecimal totalPrice) {
+        this.orderDate = orderDate;
+        this.isPaid = isPaid;
+        this.orderStatus = orderStatus;
+        this.totalPrice = totalPrice;
+    }
 }
