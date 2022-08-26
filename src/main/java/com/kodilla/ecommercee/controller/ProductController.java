@@ -37,6 +37,7 @@ public class ProductController {
     @GetMapping("{productId}")
     public ResponseEntity<ProductDto> getProduct(@PathVariable Long productId) {
         System.out.println("get one product with id=" + productId);
+
         return ResponseEntity.ok(new ProductDto(1L,"productName",
                 "productDescription",
                 new BigDecimal(1000),
@@ -61,6 +62,7 @@ public class ProductController {
                 new BigDecimal(1000),
                 new Group("group name", "GroupDescription", new ArrayList<>()
                 )));
+
     }
 
     @DeleteMapping("{productId}")
