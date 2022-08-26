@@ -15,17 +15,23 @@ import java.util.List;
 
 public class Cart {
 
+
+    public Cart(long id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue
     @NotNull
     @Column(name = "ID", unique = true)
     private long id;
 
-    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "carts")
-    private List<Product> products;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name= "USERS_ID")
     private User user;
 
+
+    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "carts")
+    private List<Product> products;
 }
