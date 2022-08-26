@@ -19,8 +19,8 @@ public class Product {
     @Column(name = "ID", unique = true)
     private long id;
 
-    @ManyToOne
     @NotNull
+    @ManyToOne
     @JoinColumn(name = "GROUP_ID")
     private Group group;
 }
