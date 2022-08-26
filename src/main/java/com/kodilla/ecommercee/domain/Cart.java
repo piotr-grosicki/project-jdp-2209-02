@@ -15,6 +15,12 @@ import java.util.List;
 
 public class Cart {
 
+    public Cart(long id, User user, Order order) {
+        this.id = id;
+        this.user = user;
+        this.order = order;
+    }
+
 
     public Cart(long id) {
         this.id = id;
@@ -31,7 +37,11 @@ public class Cart {
     @JoinColumn(name= "USERS_ID")
     private User user;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name= "ORDERS_ID")
+    private Order order;
 
     @ManyToMany(cascade = CascadeType.ALL,mappedBy = "carts")
     private List<Product> products;
+
 }
