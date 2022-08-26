@@ -24,36 +24,16 @@ import java.util.UUID;
 public class CartController {
 
     @Autowired
-    CartRepository cartRepository;
-
-    @Autowired
     CartService service;
 
     @Autowired
     CartMapper cartMapper;
 
 
-
-    //Pomoc naukowa
-    User USER_EXAMPLE = new User(1L, "l", "m","a", false,
-            new UUID(1L, 1L), LocalTime.now(), new ArrayList<>());
-
-//    Cart CART_EXAMPLE = new Cart(1L, USER_EXAMPLE, new ArrayList<>());
-
-//    Order ORDER_EXAMPLE = new Order(1L, USER_EXAMPLE, LocalDate.now(), false, "os",
-//            new BigDecimal("123"), CART_EXAMPLE);
-
-    Group GROUP_EXAMPLE = new Group(1L, "n", "d", new ArrayList<>());
-
-    Product PRODUCT_EXAMPLE = new Product(1L, GROUP_EXAMPLE, "n", "d",
-            new BigDecimal("123"), new ArrayList<>());
-
-
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<Void> createCart(@RequestBody CartDto cartDto) {
-        List<Product> products = new ArrayList<>();
-        Cart cart = new Cart(cartDto.getId());
-        cartRepository.save(cart);
+        Cart cart = cartMapper.mapToCart(cartDto);
+        service.saveCart(cart);
         return ResponseEntity.ok().build();
     }
 

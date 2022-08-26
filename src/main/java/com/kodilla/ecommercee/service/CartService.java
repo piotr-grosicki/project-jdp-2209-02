@@ -12,11 +12,15 @@ import org.springframework.stereotype.Service;
 public class CartService {
 
     @Autowired
-    CartRepository cartRepository;
+    CartRepository repository;
 
     public Cart getCart(final Long id) throws Exception {
-        return cartRepository.findById(id)
+        return repository.findById(id)
                 .orElseThrow(Exception::new);
+    }
+
+    public Cart saveCart(final Cart cart) {
+        return repository.save(cart);
     }
 
 }
