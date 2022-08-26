@@ -35,4 +35,10 @@ public class Group {
             fetch = FetchType.LAZY
     )
     private List<Product> productList;
+
+    public Group(String name, String description, List<Product> productList) {
+        this.name = name;
+        this.description = description;
+        this.productList = productList;
+    }
 }

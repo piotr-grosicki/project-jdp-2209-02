@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
 
+import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.domain.dto.GroupDto;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,33 +21,27 @@ public class ProductController {
     public ResponseEntity<List<ProductDto>> getProducts() {
         System.out.println("get all products");
         List<ProductDto> products = new ArrayList<>();
-        products.add(
-                new ProductDto(1L,
-                        "laptop Lenovo",
-                        "jest super",
-                        1999.99F
-                )
-        );
-        products.add(
-                new ProductDto(2L,
-                        "Mysz Dell",
-                        "jest super",
-                        1999.99F
-                )
-        );
+        products.add(new ProductDto(1L,"productName",
+                "productDescription",
+                new BigDecimal(1000),
+                new Group("group name", "GroupDescription", new ArrayList<>()
+                )));
+        products.add(new ProductDto(1L,"productName",
+                "productDescription",
+                new BigDecimal(1000),
+                new Group("group name", "GroupDescription", new ArrayList<>()
+                )));
         return ResponseEntity.ok(products);
     }
 
     @GetMapping("{productId}")
     public ResponseEntity<ProductDto> getProduct(@PathVariable Long productId) {
         System.out.println("get one product with id=" + productId);
-        return ResponseEntity.ok(
-                new ProductDto(1L,
-                        "laptop Lenovo",
-                        "jest super",
-                        1999.99F
-                )
-        );
+        return ResponseEntity.ok(new ProductDto(1L,"productName",
+                "productDescription",
+                new BigDecimal(1000),
+                new Group("group name", "GroupDescription", new ArrayList<>()
+                )));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -60,13 +56,11 @@ public class ProductController {
     @PutMapping
     public ResponseEntity<ProductDto> updateProduct() {
         System.out.println("updating product");
-        return ResponseEntity.ok(
-                new ProductDto(1L,
-                        "laptop Lenovo",
-                        "jest super",
-                        1999.99F
-                )
-        );
+        return ResponseEntity.ok(new ProductDto(1L,"productName",
+                "productDescription",
+                new BigDecimal(1000),
+                new Group("group name", "GroupDescription", new ArrayList<>()
+                )));
     }
 
     @DeleteMapping("{productId}")
