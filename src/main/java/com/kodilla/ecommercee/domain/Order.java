@@ -25,6 +25,7 @@ public class Order {
     @JoinColumn(name = "USER_ID")
     private User user;
 
+
    // @NotNull
     @Column(name = "ORDER_DATE")
     private LocalDate orderDate;
