@@ -25,19 +25,20 @@ public class Order {
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    @NotNull
+
+   // @NotNull
     @Column(name = "ORDER_DATE")
     private LocalDate orderDate;
 
-    @NotNull
+   // @NotNull
     @Column(name = "IS_PAID")
     private boolean isPaid;
 
-    @NotNull
+   // @NotNull
     @Column(name = "ORDER_STATUS")
     private String orderStatus;
 
-    @NotNull
+  //  @NotNull
     @Column(name = "TOTAL_PRICE")
     private BigDecimal totalPrice;
 
