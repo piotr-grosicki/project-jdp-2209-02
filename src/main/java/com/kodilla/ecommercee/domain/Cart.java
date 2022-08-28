@@ -21,11 +21,6 @@ public class Cart {
         this.order = order;
     }
 
-
-    public Cart(long id) {
-        this.id = id;
-    }
-
     @Id
     @GeneratedValue
     @NotNull
