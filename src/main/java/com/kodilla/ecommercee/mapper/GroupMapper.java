@@ -11,8 +11,16 @@ import java.util.stream.Collectors;
 @Service
 public class GroupMapper {
     private ProductMapper productMapper;
+    public Group mapToNewGroup(GroupDto groupDto) {
+        return new Group(
+                groupDto.getName(),
+                groupDto.getDescription(),
+                new ArrayList<>()
+        );
+    }
     public Group mapToGroup(GroupDto groupDto) {
         return new Group(
+                groupDto.getId(),
                 groupDto.getName(),
                 groupDto.getDescription(),
                 new ArrayList<>()

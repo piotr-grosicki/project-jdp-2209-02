@@ -37,6 +37,7 @@ public class GroupService {
         if (group.getDescription() != null) {
             groupToUpdate.setDescription(group.getDescription());
         }
+        createGroup(groupToUpdate);
         return groupToUpdate;
     }
 }
