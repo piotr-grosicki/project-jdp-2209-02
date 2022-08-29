@@ -21,6 +21,11 @@ public class Product {
     @Column(name = "PRODUCT_ID", unique = true)
     private long id;
 
+    @ManyToOne
+    @NotNull
+    @JoinColumn(name = "GROUP_ID")
+    private Group group;
+
     @NotNull
     @Column(name = "PRODUCT_NAME")
     private String name;
@@ -32,12 +37,11 @@ public class Product {
     @NotNull
     @Column(name = "PRICE")
     private BigDecimal price;
-    
+
     @ManyToOne
     @NotNull
     @JoinColumn(name = "GROUP_ID")
     private Group group;
-
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -55,4 +59,3 @@ public class Product {
         this.carts = carts;
     }
 }
-
