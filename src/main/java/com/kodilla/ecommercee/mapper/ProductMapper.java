@@ -41,4 +41,6 @@ public class ProductMapper {
                 .map(this::mapToProductDto)
                 .collect(Collectors.toList());
     }
+
+    //
 }
