@@ -37,6 +37,7 @@ public class Product {
     @JoinColumn(name = "GROUP_ID")
     private Group group;
 
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "PRODUCTS_CARTS",
