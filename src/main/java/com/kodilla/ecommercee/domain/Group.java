@@ -1,6 +1,5 @@
 package com.kodilla.ecommercee.domain;
 
-
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,14 +8,13 @@ import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
-@Entity(name = "GROUPS")
+@Data
+@Entity
+@Table(name = "GROUPS")
 public class Group {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
+    @GeneratedValue
     @Column(name = "ID", unique = true)
     private long id;
 
@@ -36,9 +34,8 @@ public class Group {
     )
     private List<Product> productList;
 
-    public Group(String name, String description, List<Product> productList) {
+    public Group(String name, String description) {
         this.name = name;
         this.description = description;
-        this.productList = productList;
     }
 }

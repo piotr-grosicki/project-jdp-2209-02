@@ -24,12 +24,11 @@ public class ProductController {
         products.add(new ProductDto(1L,"productName",
                 "productDescription",
                 new BigDecimal(1000),
-                new Group("group name", "GroupDescription", new ArrayList<>()
-                )));
+                new Group("group name", "GroupDescription")));
         products.add(new ProductDto(1L,"productName",
                 "productDescription",
                 new BigDecimal(1000),
-                new Group("group name", "GroupDescription", new ArrayList<>()
+                new Group("group name", "GroupDescription"
                 )));
         return ResponseEntity.ok(products);
     }
@@ -41,7 +40,7 @@ public class ProductController {
         return ResponseEntity.ok(new ProductDto(1L,"productName",
                 "productDescription",
                 new BigDecimal(1000),
-                new Group("group name", "GroupDescription", new ArrayList<>()
+                new Group("group name", "GroupDescription"
                 )));
     }
 
@@ -60,7 +59,7 @@ public class ProductController {
         return ResponseEntity.ok(new ProductDto(1L,"productName",
                 "productDescription",
                 new BigDecimal(1000),
-                new Group("group name", "GroupDescription", new ArrayList<>()
+                new Group("group name", "GroupDescription"
                 )));
 
     }

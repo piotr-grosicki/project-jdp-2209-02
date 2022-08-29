@@ -5,7 +5,8 @@ import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.domain.dto.GroupDto;
 import com.kodilla.ecommercee.mapper.GroupMapper;
 import com.kodilla.ecommercee.service.GroupService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +15,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/shop/groups")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class GroupController {
 
+    @Autowired
     private GroupMapper groupMapper;
 
+    @Autowired
     private GroupService groupService;
 
     @GetMapping
@@ -35,13 +38,14 @@ public class GroupController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createGroup(@RequestBody GroupDto groupDto) {
-        groupService.createGroup(groupMapper.mapToGroup(groupDto));
+        Group group = groupMapper.mapToGroup(groupDto);
+        groupService.saveGroup(group);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<GroupDto> updateGroup(@RequestBody GroupDto groupDto) throws GroupNotFoundException {
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<GroupDto> updateGroup(@RequestBody GroupDto groupDto) {
         Group group = groupMapper.mapToGroup(groupDto);
-        return ResponseEntity.ok(groupMapper.mapToGroupDto(groupService.updateGroup(group)));
+        return ResponseEntity.ok(groupMapper.mapToGroupDto(groupService.saveGroup(group)));
     }
 }

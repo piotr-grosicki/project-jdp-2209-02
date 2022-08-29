@@ -27,7 +27,7 @@ public class OrderController {
         ProductDto productDto = new ProductDto(1L,"productName",
                 "productDescription",
                 new BigDecimal(1000),
-                new Group("group name", "GroupDescription", new ArrayList<>()
+                new Group("group name", "GroupDescription"
                 ));
         cartDto.getProductDtoList().add(productDto);
         return new OrderDto(1L, 1L, 1L, false, new BigDecimal("22.3"), productDtoList);
@@ -45,7 +45,7 @@ public class OrderController {
         ProductDto productDto = new ProductDto(1L,"productName",
                 "productDescription",
                 new BigDecimal(1000),
-                new Group("group name", "GroupDescription", new ArrayList<>()
+                new Group("group name", "GroupDescription"
                 ));
         cartDto.getProductDtoList().add(productDto);
         return new OrderDto(1L, 1L, 1L, true, new BigDecimal("25.0"), productDtoList);

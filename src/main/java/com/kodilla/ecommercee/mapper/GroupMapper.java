@@ -9,12 +9,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 @Service
 public class GroupMapper {
-    private ProductMapper productMapper;
+
     public Group mapToGroup(GroupDto groupDto) {
         return new Group(
                 groupDto.getName(),
-                groupDto.getDescription(),
-                new ArrayList<>()
+                groupDto.getDescription()
         );
     }
 
@@ -22,10 +21,7 @@ public class GroupMapper {
         return new GroupDto(
                 group.getId(),
                 group.getName(),
-                group.getDescription(),
-                group.getProductList().stream()
-                        .map(product -> productMapper.mapToProductDto(product))
-                        .collect(Collectors.toList())
+                group.getDescription()
         );
     }
     public List<GroupDto> mapToTaskDtoList(List<Group> groupList){

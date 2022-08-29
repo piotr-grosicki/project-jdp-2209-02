@@ -36,7 +36,7 @@ public class CartController {
                 productId,"productName",
                 "productDescription",
                 new BigDecimal(1000),
-                new Group("group name", "GroupDescription", new ArrayList<>()
+                new Group("group name", "GroupDescription"
                 ));
         cartDto.getProductDtoList().add(productDto);
     }
@@ -48,7 +48,7 @@ public class CartController {
                 productId,"productName",
                 "productDescription",
                 new BigDecimal(1000),
-                new Group("group name", "GroupDescription", new ArrayList<>()
+                new Group("group name", "GroupDescription"
                 ));
         CartDto cartDto = new CartDto(1L,1L,1L,productDtoList);
         cartDto.getProductDtoList().add(productDto);
@@ -61,7 +61,7 @@ public class CartController {
         ProductDto productDto = new ProductDto(1L,"productName",
                 "productDescription",
                 new BigDecimal(1000),
-                new Group("group name", "GroupDescription", new ArrayList<>()
+                new Group("group name", "GroupDescription"
                 ));
         CartDto cartDto = new CartDto(cartId,1L,1L,productDtoList);
         cartDto.getProductDtoList().add(productDto);
