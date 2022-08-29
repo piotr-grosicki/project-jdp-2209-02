@@ -30,13 +30,11 @@ public class CartController {
     @PostMapping(value = "{productId}")
     public void addProductToCart(@PathVariable long productId) {
         List<ProductDto> productDtoList = new ArrayList<>();
-        CartDto cartDto = new CartDto(1L,1L,1L,productDtoList);
         ProductDto productDto = new ProductDto(
-                productId,"productName",
+                productId, 1L,"productName",
                 "productDescription",
-                new BigDecimal(1000),
-                new Group("group name", "GroupDescription", new ArrayList<>()
-                ));
+                new BigDecimal(1000));
+        CartDto cartDto = new CartDto(1L,1L,1L,productDtoList);
         cartDto.getProductDtoList().add(productDto);
     }
 
@@ -44,11 +42,9 @@ public class CartController {
     public void deleteProductFromCart(@PathVariable long productId) {
         List<ProductDto> productDtoList = new ArrayList<>();
         ProductDto productDto = new ProductDto(
-                productId,"productName",
+                productId,1L, "productName",
                 "productDescription",
-                new BigDecimal(1000),
-                new Group("group name", "GroupDescription", new ArrayList<>()
-                ));
+                new BigDecimal(1000));
         CartDto cartDto = new CartDto(1L,1L,1L,productDtoList);
         cartDto.getProductDtoList().add(productDto);
         cartDto.getProductDtoList().remove(productDto);
@@ -57,11 +53,9 @@ public class CartController {
     @PostMapping(value = "createOrder/{cartId}")
     public void createOrderFromCart(@PathVariable long cartId) {
         List<ProductDto> productDtoList = new ArrayList<>();
-        ProductDto productDto = new ProductDto(1L,"productName",
+        ProductDto productDto = new ProductDto(1L, 1L, "productName",
                 "productDescription",
-                new BigDecimal(1000),
-                new Group("group name", "GroupDescription", new ArrayList<>()
-                ));
+                new BigDecimal(1000));
         CartDto cartDto = new CartDto(cartId,1L,1L,productDtoList);
         cartDto.getProductDtoList().add(productDto);
 

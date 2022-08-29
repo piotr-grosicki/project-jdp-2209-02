@@ -1,8 +1,5 @@
 package com.kodilla.ecommercee.controller;
 
-
-import com.kodilla.ecommercee.domain.Group;
-import com.kodilla.ecommercee.domain.dto.GroupDto;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
@@ -21,16 +18,12 @@ public class ProductController {
     public ResponseEntity<List<ProductDto>> getProducts() {
         System.out.println("get all products");
         List<ProductDto> products = new ArrayList<>();
-        products.add(new ProductDto(1L,"productName",
+        products.add(new ProductDto(1L, 1L, "productName",
                 "productDescription",
-                new BigDecimal(1000),
-                new Group("group name", "GroupDescription", new ArrayList<>()
-                )));
-        products.add(new ProductDto(1L,"productName",
+                new BigDecimal(1000)));
+        products.add(new ProductDto(1L, 1L, "productName",
                 "productDescription",
-                new BigDecimal(1000),
-                new Group("group name", "GroupDescription", new ArrayList<>()
-                )));
+                new BigDecimal(1000)));
         return ResponseEntity.ok(products);
     }
 
@@ -38,11 +31,9 @@ public class ProductController {
     public ResponseEntity<ProductDto> getProduct(@PathVariable Long productId) {
         System.out.println("get one product with id=" + productId);
 
-        return ResponseEntity.ok(new ProductDto(1L,"productName",
+        return ResponseEntity.ok(new ProductDto(1L, 1L, "productName",
                 "productDescription",
-                new BigDecimal(1000),
-                new Group("group name", "GroupDescription", new ArrayList<>()
-                )));
+                new BigDecimal(1000)));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -57,11 +48,9 @@ public class ProductController {
     @PutMapping
     public ResponseEntity<ProductDto> updateProduct() {
         System.out.println("updating product");
-        return ResponseEntity.ok(new ProductDto(1L,"productName",
+        return ResponseEntity.ok(new ProductDto(1L, 1L, "productName",
                 "productDescription",
-                new BigDecimal(1000),
-                new Group("group name", "GroupDescription", new ArrayList<>()
-                )));
+                new BigDecimal(1000)));
 
     }
 
