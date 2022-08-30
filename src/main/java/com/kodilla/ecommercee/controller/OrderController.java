@@ -1,6 +1,5 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.domain.dto.CartDto;
 import com.kodilla.ecommercee.domain.dto.OrderDto;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
@@ -24,11 +23,9 @@ public class OrderController {
     public OrderDto getOrder(@PathVariable int orderId){
         CartDto cartDto = new CartDto(1L, 1L, 1L, new ArrayList<>());
         List<ProductDto> productDtoList = new ArrayList<>();
-        ProductDto productDto = new ProductDto(1L, 1L,"productName",
-                "productDescription",
-                new BigDecimal(1000));
+        ProductDto productDto = new ProductDto(1L, 1L, "productName","productDescription",new BigDecimal(100));
         cartDto.getProductDtoList().add(productDto);
-        return new OrderDto(1L, 1L, 1L, false, new BigDecimal("22.3"), productDtoList);
+        return new OrderDto(1L, 1L, 1L, false, new BigDecimal(22.3), productDtoList);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -40,11 +37,9 @@ public class OrderController {
     public OrderDto updateOrder(@RequestBody OrderDto orderDto){
         CartDto cartDto = new CartDto(1L, 1L, 1L, new ArrayList<>());
         List<ProductDto> productDtoList = new ArrayList<>();
-        ProductDto productDto = new ProductDto(1L, 1L, "productName",
-                "productDescription",
-                new BigDecimal(1000));
+        ProductDto productDto = new ProductDto(1L, 1L, "productName","productDescription",new BigDecimal(1000));
         cartDto.getProductDtoList().add(productDto);
-        return new OrderDto(1L, 1L, 1L, true, new BigDecimal("25.0"), productDtoList);
+        return new OrderDto(1L, 1L, 1L, true, new BigDecimal(25.0), productDtoList);
 
     }
 }

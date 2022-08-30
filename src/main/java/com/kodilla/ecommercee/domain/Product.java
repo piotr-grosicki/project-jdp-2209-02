@@ -1,6 +1,8 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -9,16 +11,19 @@ import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
-@Entity(name = "PRODUCTS")
+@Data
+@Entity
+@Table(name = "PRODUCTS")
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
+    @GeneratedValue
     @Column(name = "PRODUCT_ID", unique = true)
     private long id;
+
+    @ManyToOne
+    @JoinColumn(name = "GROUP_ID")
+    private Group group;
 
     @NotNull
     @Column(name = "PRODUCT_NAME")
@@ -32,12 +37,6 @@ public class Product {
     @Column(name = "PRICE")
     private BigDecimal price;
 
-    @ManyToOne
-
-    @JoinColumn(name = "GROUP_ID")
-    private Group group;
-
-
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "PRODUCTS_CARTS",
@@ -46,10 +45,17 @@ public class Product {
     )
     private List<Cart> carts;
 
-    public Product(String name, String description, BigDecimal price, List<Cart> carts) {
+    public Product(String name, String description, BigDecimal price) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.carts = carts;
     }
+
+    public Product(Group group, String name, String description, BigDecimal price) {
+        this.group = group;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
+
 }
