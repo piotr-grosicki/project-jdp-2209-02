@@ -5,7 +5,6 @@ import com.kodilla.ecommercee.domain.dto.ProductDto;
 import com.kodilla.ecommercee.exceptions.GroupNotFoundException;
 import com.kodilla.ecommercee.exceptions.ProductNotFoundException;
 import com.kodilla.ecommercee.mapper.ProductMapper;
-import com.kodilla.ecommercee.repository.ProductRepository;
 import com.kodilla.ecommercee.service.ProductDbService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -22,7 +21,6 @@ public class ProductController {
 
     private final ProductDbService productService;
     private final ProductMapper productMapper;
-    private final ProductRepository productRepository;
 
     @GetMapping
     public ResponseEntity<List<ProductDto>> getProducts() {
