@@ -18,6 +18,7 @@ public class ProductMapper {
 
     public Product mapToProduct(final ProductDto productDto) throws GroupNotFoundException {
         return new Product(
+                productDto.getProductId(),
                 groupService.getGroup(productDto.getGroupId()),
                 productDto.getProductName(),
                 productDto.getProductDescription(),

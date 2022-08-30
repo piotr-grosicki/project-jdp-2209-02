@@ -51,11 +51,11 @@ public class Product {
         this.price = price;
     }
 
-    public Product(Group group, String name, String description, BigDecimal price) {
+    public Product(long id, Group group, String name, String description, BigDecimal price) {
+        this.id = id;
         this.group = group;
         this.name = name;
         this.description = description;
         this.price = price;
     }
-
 }
