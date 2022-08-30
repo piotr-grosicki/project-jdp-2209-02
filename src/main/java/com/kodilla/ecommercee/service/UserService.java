@@ -1,9 +1,7 @@
 package com.kodilla.ecommercee.service;
 
-import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.domain.dto.UserDto;
-import com.kodilla.ecommercee.exception.GroupNotFoundException;
 import com.kodilla.ecommercee.exception.UserLoginAlreadyExistsException;
 import com.kodilla.ecommercee.exception.UserNotFoundException;
 import com.kodilla.ecommercee.mapper.UserMapper;
