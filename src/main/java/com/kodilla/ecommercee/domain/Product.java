@@ -12,17 +12,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity(name = "PRODUCTS")
+@Entity
+@Table(name = "PRODUCTS")
 public class Product {
 
     @Id
     @GeneratedValue
-    @NotNull
     @Column(name = "PRODUCT_ID", unique = true)
     private long id;
 
     @ManyToOne
-    @NotNull
     @JoinColumn(name = "GROUP_ID")
     private Group group;
 
@@ -51,4 +50,12 @@ public class Product {
         this.description = description;
         this.price = price;
     }
+
+    public Product(Group group, String name, String description, BigDecimal price) {
+        this.group = group;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
+
 }

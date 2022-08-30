@@ -1,85 +1,61 @@
 package com.kodilla.ecommercee.controller;
 
-
-import com.kodilla.ecommercee.domain.dto.GroupDto;
+import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
-import lombok.AllArgsConstructor;
+import com.kodilla.ecommercee.exceptions.GroupNotFoundException;
+import com.kodilla.ecommercee.exceptions.ProductNotFoundException;
+import com.kodilla.ecommercee.mapper.ProductMapper;
+import com.kodilla.ecommercee.repository.ProductRepository;
+import com.kodilla.ecommercee.service.ProductDbService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("v1/shop/products")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ProductController {
+
+    private final ProductDbService productService;
+    private final ProductMapper productMapper;
+    private final ProductRepository productRepository;
+
     @GetMapping
     public ResponseEntity<List<ProductDto>> getProducts() {
-        System.out.println("get all products");
-        List<ProductDto> products = new ArrayList<>();
-        products.add(
-                new ProductDto(1L,
-                        "laptop Lenovo",
-                        "jest super",
-                        1999.99F
-
-                )
-        );
-
-        products.add(
-                new ProductDto(2L,
-                        "Mysz Dell",
-                        "jest super",
-                        1999.99F
-
-                )
-        );
-
-        return ResponseEntity.ok(products);
+        List<Product> products = productService.getAllProducts();
+        return ResponseEntity.ok(productMapper.mapToProductDtoList(products));
     }
 
-    @GetMapping("{productId}")
-    public ResponseEntity<ProductDto> getProduct(@PathVariable Long productId) {
-        System.out.println("get one product with id=" + productId);
-        return ResponseEntity.ok(
-                new ProductDto(1L,
-                        "laptop Lenovo",
-                        "jest super",
-                        1999.99F
-
-                )
-        );
-
+    @GetMapping(value = "{productId}")
+    public ResponseEntity<ProductDto> getProduct(@PathVariable Long productId) throws ProductNotFoundException {
+       return ResponseEntity.ok(productMapper.mapToProductDto(productService.getProductById(productId)));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addNewProduct(@RequestBody ProductDto productDto) {
-        System.out.println("Adding new product: "
-                + productDto.getId() + " "
-                + productDto.getName() + " "
-                + productDto.getPrice());
+    public ResponseEntity<Void> addNewProduct(@RequestBody ProductDto productDto) throws GroupNotFoundException {
+        Product product = productMapper.mapToProduct(productDto);
+        productService.saveProduct(product);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping
-    public ResponseEntity<ProductDto> updateProduct() {
-        System.out.println("updating product");
-        return ResponseEntity.ok(
-                new ProductDto(1L,
-                        "laptop Lenovo",
-                        "jest super",
-                        1999.99F
-
-                )
-        );
-
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ProductDto> updateProduct(@RequestBody ProductDto productDto) throws GroupNotFoundException {
+        Product product = productMapper.mapToProduct(productDto);
+        Product updatedProduct = productService.saveProduct(product);
+        return ResponseEntity.ok(productMapper.mapToProductDto(updatedProduct));
     }
 
-    @DeleteMapping("{productId}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long productId) {
-        System.out.println("delete product by id=" + productId);
+    @DeleteMapping(value = "{productId}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long productId) throws ProductNotFoundException{
+
+        if(productRepository.existsById(productId)) {
+            productService.deleteProduct(productId);
+        } else {
+            throw new ProductNotFoundException();
+        }
         return ResponseEntity.ok().build();
     }
 }
