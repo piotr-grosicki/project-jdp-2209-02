@@ -41,7 +41,7 @@ public class ProductDbService {
     }
 
     public Product updateProduct(final Product product) throws ProductNotFoundException {
-        Product productToUpdate = productRepository.findById(product.getId()).orElseThrow(ProductNotFoundException::new);
+        Product productToUpdate = getProductById(product.getId());
         if (product.getGroup() != null) {
             productToUpdate.setGroup(product.getGroup());
         }

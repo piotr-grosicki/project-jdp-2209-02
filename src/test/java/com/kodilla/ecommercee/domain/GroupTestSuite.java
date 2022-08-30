@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
+import com.kodilla.ecommercee.exceptions.GroupNotFoundException;
 import com.kodilla.ecommercee.repository.GroupRepository;
 
 import com.kodilla.ecommercee.repository.ProductRepository;
@@ -84,5 +85,7 @@ class GroupTestSuite {
         assertTrue(groupRepository.existsById(id));
 
         groupRepository.deleteById(id);
+
+        assertFalse(groupRepository.existsById(id));
     }
 }

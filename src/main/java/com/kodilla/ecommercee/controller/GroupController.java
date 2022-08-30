@@ -39,7 +39,7 @@ public class GroupController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<GroupDto> updateGroup(@RequestBody GroupDto groupDto) throws GroupNotFoundException {
         return ResponseEntity.ok(
                 groupMapper.mapToGroupDto(
