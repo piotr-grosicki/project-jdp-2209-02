@@ -12,14 +12,18 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity(name = "PRODUCTS")
+@Entity
+@Table(name = "PRODUCTS")
 public class Product {
 
     @Id
     @GeneratedValue
-    @NotNull
     @Column(name = "PRODUCT_ID", unique = true)
     private long id;
+
+    @ManyToOne
+    @JoinColumn(name = "GROUP_ID")
+    private Group group;
 
     @NotNull
     @Column(name = "PRODUCT_NAME")
@@ -32,12 +36,6 @@ public class Product {
     @NotNull
     @Column(name = "PRICE")
     private BigDecimal price;
-    
-    @ManyToOne
-    @NotNull
-    @JoinColumn(name = "GROUP_ID")
-    private Group group;
-
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -47,18 +45,17 @@ public class Product {
     )
     private List<Cart> carts;
 
-    public Product(String name, String description, BigDecimal price, Group group, List<Cart> carts) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.group = group;
-        this.carts = carts;
-    }
-
     public Product(String name, String description, BigDecimal price) {
         this.name = name;
         this.description = description;
         this.price = price;
     }
-}
 
+    public Product(Group group, String name, String description, BigDecimal price) {
+        this.group = group;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
+
+}
