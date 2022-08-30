@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.dto.UserDto;
+import com.kodilla.ecommercee.exception.UserNotFoundException;
 import com.kodilla.ecommercee.repository.UserRepository;
 import com.kodilla.ecommercee.service.UserService;
 import lombok.AllArgsConstructor;
@@ -24,13 +25,14 @@ public class UserController {
     }
 
     @PutMapping(value = "/changeStatus/{userId}")
-    public void changeUserStatus(@PathVariable long userId) {
-
+    public ResponseEntity<UserDto> changeUserStatus(@PathVariable long userId) throws UserNotFoundException {
+        UserDto userDto = userService.changeUserStatus(userId);
+        return ResponseEntity.ok(userDto);
     }
 
     @PutMapping(value = "/createKey/{userId}")
-    public ResponseEntity<UserDto> createUserKey(@PathVariable long userId) {
+    public ResponseEntity<UUID> createUserKey(@PathVariable long userId) throws UserNotFoundException {
         UserDto userDto = userService.createUserKey(userId);
-        return ResponseEntity.ok(userDto);
+        return ResponseEntity.ok(userDto.getUserKey());
     }
 }

@@ -21,17 +21,21 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    public List<User> getAllUsers() {
-        System.out.println("getAllUsers");
-        return userRepository.findAll();
-    }
-
     public User getUserById(Long userId) throws UserNotFoundException {
         System.out.println("getUserById");
         return userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
     }
 
-    public UserDto createUserKey(Long userId) {
+    public void createUser(UserDto userDto){
+        User user = userMapper.mapToUser(userDto);
+        user.setOrders(new ArrayList<>());
+        user.setId(null);
+        System.out.println(user);
+        user = userRepository.save(user);
+        System.out.println("New user: " + user.getLogin() + " created.");
+    }
+
+    public UserDto createUserKey(Long userId) throws UserNotFoundException {
         System.out.println("createUserId");
 
         UUID uuid = UUID.randomUUID();
@@ -40,30 +44,23 @@ public class UserService {
             uuid = UUID.randomUUID();
         }
         System.out.println(uuid);
-        User user = new User();
-
-        try {
-            user = getUserById(userId);
-            //if (user.getUserKey() == null) {
-                user.setUserKey(uuid);
-            //}
-            user = userRepository.save(user);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return userMapper.mapToUserDto(user);
-    }
-
-    public void createUser(UserDto userDto){
-        User user = userMapper.mapToUser(userDto);
-        user.setOrders(new ArrayList<>());
-        System.out.println(user);
+        User user = getUserById(userId);
+        user.setUserKey(uuid);
+        //set validity time - current + 1H
         user = userRepository.save(user);
-        System.out.println("New user: " + user.getLogin() + " created.");
+
+        return userMapper.mapToUserDto(user);
     }
 
     public boolean isUserKeyFree(UUID uuid){
         return !userRepository.findByUserKey(uuid).isPresent();
+    }
+
+    public UserDto changeUserStatus(Long userId) throws UserNotFoundException {
+            User user = getUserById(userId);
+            user.setBlocked(!user.isBlocked());
+            userRepository.save(user);
+            return userMapper.mapToUserDto(user);
     }
 
 }
