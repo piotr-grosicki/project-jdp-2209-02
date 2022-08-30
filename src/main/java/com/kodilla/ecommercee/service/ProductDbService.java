@@ -14,8 +14,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductDbService {
 
-    @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    public ProductDbService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
@@ -25,12 +29,35 @@ public class ProductDbService {
         return productRepository.findById(productId).orElseThrow(ProductNotFoundException::new);
     }
 
-    public Product saveProduct(final Product product) {
-        return productRepository.save(product);
+    public void saveProduct(final Product product) {
+        productRepository.save(product);
     }
 
-    public void deleteProduct(final long productId) {
+    public void deleteProduct(final long productId) throws ProductNotFoundException {
+        if (!productRepository.existsById(productId)){
+            throw new ProductNotFoundException();
+        }
         productRepository.deleteById(productId);
+    }
+
+    public Product updateProduct(final Product product) throws ProductNotFoundException {
+        Product productToUpdate = productRepository.findById(product.getId()).orElseThrow(ProductNotFoundException::new);
+        if (product.getGroup() != null) {
+            productToUpdate.setGroup(product.getGroup());
+        }
+        if (product.getName() != null) {
+            productToUpdate.setName(product.getName());
+        }
+        if (product.getDescription() != null) {
+            productToUpdate.setDescription(product.getDescription());
+        }
+        if (product.getPrice() != null) {
+            productToUpdate.setPrice(product.getPrice());
+        }
+        if (product.getCarts() != null) {
+            productToUpdate.setCarts(product.getCarts());
+        }
+        return productRepository.save(productToUpdate);
     }
 
     public List<Product> getProductsByGroup(final Group group) {

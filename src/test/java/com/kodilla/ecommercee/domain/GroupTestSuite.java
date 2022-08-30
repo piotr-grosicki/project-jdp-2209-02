@@ -48,8 +48,8 @@ class GroupTestSuite {
     void testGroupSaveWithProducts() {
         //Given
         Group group = new Group(GROUP_NAME, GROUP_DESC, new ArrayList<>());
-        Product product = new Product("name test 1", "Descriptions test 1", new BigDecimal("130.5"), new ArrayList<>());
-        Product product1 = new Product("name test 2", "Descriptions test 2", new BigDecimal("150.5"), new ArrayList<>());
+        Product product = new Product(group, "name test 1","Name test 1", new BigDecimal("130.5"));
+        Product product1 = new Product(group,"name test 2", "Descriptions test 2", new BigDecimal("150.5"));
         group.getProductList().add(product);
         group.getProductList().add(product1);
 

@@ -4,7 +4,6 @@ import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
 import com.kodilla.ecommercee.exceptions.GroupNotFoundException;
 import com.kodilla.ecommercee.service.GroupDbService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,12 +12,25 @@ import java.util.stream.Collectors;
 @Service
 public class ProductMapper {
 
-    @Autowired
-    private GroupDbService groupService;
+    private final GroupDbService groupDbService;
+
+    public ProductMapper(GroupDbService groupDbService) {
+        this.groupDbService = groupDbService;
+    }
+
+    public Product mapToNewProduct(final ProductDto productDto) throws GroupNotFoundException {
+        return new Product(
+                groupDbService.getGroupById(productDto.getGroupId()),
+                productDto.getProductName(),
+                productDto.getProductDescription(),
+                productDto.getProductPrice()
+        );
+    }
 
     public Product mapToProduct(final ProductDto productDto) throws GroupNotFoundException {
         return new Product(
-                groupService.getGroup(productDto.getGroupId()),
+                productDto.getProductId(),
+                groupDbService.getGroupById(productDto.getGroupId()),
                 productDto.getProductName(),
                 productDto.getProductDescription(),
                 productDto.getProductPrice()
@@ -40,6 +52,4 @@ public class ProductMapper {
                 .map(this::mapToProductDto)
                 .collect(Collectors.toList());
     }
-
-    //
 }

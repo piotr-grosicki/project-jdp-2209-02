@@ -12,12 +12,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity
-@Table(name = "PRODUCTS")
+@Entity(name = "PRODUCTS")
 public class Product {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     @Column(name = "PRODUCT_ID", unique = true)
     private long id;
 
@@ -58,4 +58,11 @@ public class Product {
         this.price = price;
     }
 
+    public Product(long id, Group group, String name, String description, BigDecimal price) {
+        this.id = id;
+        this.group = group;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
 }
