@@ -4,14 +4,12 @@ import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.domain.dto.UserDto;
 import com.kodilla.ecommercee.exception.GroupNotFoundException;
+import com.kodilla.ecommercee.exception.UserLoginAlreadyExistsException;
 import com.kodilla.ecommercee.exception.UserNotFoundException;
 import com.kodilla.ecommercee.mapper.UserMapper;
 import com.kodilla.ecommercee.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -26,34 +24,42 @@ public class UserService {
         return userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
     }
 
-    public void createUser(UserDto userDto){
+    public UserDto createUser(UserDto userDto) throws UserLoginAlreadyExistsException {
         User user = userMapper.mapToUser(userDto);
-        user.setOrders(new ArrayList<>());
-        user.setId(null);
-        System.out.println(user);
+
+        if (isLoginTaken(userDto.getLogin())) {
+            throw new UserLoginAlreadyExistsException();
+        }
+
         user = userRepository.save(user);
         System.out.println("New user: " + user.getLogin() + " created.");
+        return userMapper.mapToUserDto(user);
     }
 
     public UserDto createUserKey(Long userId) throws UserNotFoundException {
-        System.out.println("createUserId");
+        System.out.println("createUserKey");
 
         UUID uuid = UUID.randomUUID();
-        while (!isUserKeyFree(uuid)){
-            System.out.println(uuid);
+        while (isUserKeyTaken(uuid)){
             uuid = UUID.randomUUID();
         }
-        System.out.println(uuid);
+        System.out.println("UserKey:" + uuid);
         User user = getUserById(userId);
         user.setUserKey(uuid);
         //set validity time - current + 1H
+
         user = userRepository.save(user);
 
         return userMapper.mapToUserDto(user);
     }
 
-    public boolean isUserKeyFree(UUID uuid){
-        return !userRepository.findByUserKey(uuid).isPresent();
+    public boolean isLoginTaken(String login) {
+        System.out.println("isLoginTaken? " + login);
+        return userRepository.findByLogin(login).isPresent();
+    }
+
+    public boolean isUserKeyTaken(UUID uuid){
+        return userRepository.findByUserKey(uuid).isPresent();
     }
 
     public UserDto changeUserStatus(Long userId) throws UserNotFoundException {

@@ -44,6 +44,14 @@ public class User {
     )
     private List<Order> orders;
 
+    public User(Long id, String login, String mail, String address, boolean isBlocked, UUID userKey) {
+        this.id = id;
+        this.login = login;
+        this.mail = mail;
+        this.address = address;
+        this.isBlocked = isBlocked;
+        this.userKey = userKey;
+    }
 }
 
 
