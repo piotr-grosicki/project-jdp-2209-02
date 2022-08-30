@@ -14,16 +14,15 @@ import java.util.List;
 @NoArgsConstructor
 public class CartDto {
 
-    public CartDto(long id, User userId, Order orderId) {
+    public CartDto(long id, long userId) {
         this.id = id;
         this.userId = userId;
-        this.orderId = orderId;
     }
 
 
-    private long id;
-    private User userId;
-    private Order orderId;
+    private Long id;
+    private Long userId;
+    private Long orderId;
     private List<ProductDto> productDtoList;
 
 }

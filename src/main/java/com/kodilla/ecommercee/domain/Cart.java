@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
+import com.kodilla.ecommercee.domain.dto.ProductDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,10 +16,9 @@ import java.util.List;
 
 public class Cart {
 
-    public Cart(long id, User user, Order order) {
+    public Cart(long id, User user) {
         this.id = id;
         this.user = user;
-        this.order = order;
     }
 
     @Id

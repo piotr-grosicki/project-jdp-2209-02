@@ -2,6 +2,8 @@ package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.*;
 import com.kodilla.ecommercee.domain.dto.CartDto;
+import com.kodilla.ecommercee.domain.dto.OrderDto;
+import com.kodilla.ecommercee.domain.dto.ProductDto;
 import com.kodilla.ecommercee.mapper.CartMapper;
 import com.kodilla.ecommercee.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,6 @@ public class CartController {
 
     @Autowired
     CartService service;
-
     @Autowired
     CartMapper cartMapper;
 
@@ -30,7 +31,7 @@ public class CartController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CartDto>> getGroups() {
+    public ResponseEntity<List<CartDto>> getCarts() {
         List<Cart> carts = service.getAllCarts();
         return ResponseEntity.ok(cartMapper.mapToCartDtoList(carts));
     }
@@ -39,31 +40,23 @@ public class CartController {
     public ResponseEntity<CartDto> getCart(@PathVariable long cartId) throws Exception {
         return ResponseEntity.ok(cartMapper.mapToCartDto(service.getCart(cartId)));
     }
-//
-//    @PostMapping(value = "{productId}")
-//    public void addProductToCart(@PathVariable long productId) {
-//        List<ProductDto> productDtoList = new ArrayList<>();
-//        CartDto cartDto = new CartDto(1L,1L,1L,productDtoList);
-//        ProductDto productDto = new ProductDto(productId,"productName","productDescription",1000);
-//        cartDto.getProductDtoList().add(productDto);
-//    }
-//
-//    @DeleteMapping(value = "{productId}")
-//    public void deleteProductFromCart(@PathVariable long productId) {
-//        List<ProductDto> productDtoList = new ArrayList<>();
-//        ProductDto productDto = new ProductDto(productId,"productName","productDescription",1000);
-//        CartDto cartDto = new CartDto(1L,1L,1L,productDtoList);
-//        cartDto.getProductDtoList().add(productDto);
-//        cartDto.getProductDtoList().remove(productDto);
-//    }
-//
-//    @PostMapping(value = "createOrder/{cartId}")
-//    public void createOrderFromCart(@PathVariable long cartId) {
-//        List<ProductDto> productDtoList = new ArrayList<>();
-//        ProductDto productDto = new ProductDto(1L,"productName","productDescription",1000);
-//        CartDto cartDto = new CartDto(cartId,1L,1L,productDtoList);
-//        cartDto.getProductDtoList().add(productDto);
-//
-//        new OrderDto(1L, 1L , 1L ,true,new BigDecimal(22.10),productDtoList);
+
+    @PutMapping(value = "{cartId}")
+    public ResponseEntity<Void> putProductIntoCart(@PathVariable CartDto cartId,
+                                                   @RequestBody ProductDto productDto) throws Exception {
+        Cart cart = cartMapper.mapToCart(cartId);
+        cart.getProducts().add(cartMapper.);
+        service.saveCart(cart);
+        return ResponseEntity.ok().build();
+    }
+
+
+
+//    @PutMapping(value = "{cartId/orderID}")
+//    public ResponseEntity<Void> putCartIntoOrder(@RequestBody OrderDto orderDto,
+//                                                 @PathVariable CartDto cartId) throws Exception {
+//        Cart cart = cartMapper.mapToCart(cartId);
+//        cart.setOrder(orderDto.);
+//        return;
 //    }
 }
