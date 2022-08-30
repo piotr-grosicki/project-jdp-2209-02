@@ -17,6 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("v1/shop/products")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class ProductController {
 
     private final ProductDbService productService;
@@ -43,7 +44,7 @@ public class ProductController {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ProductDto> updateProduct(@RequestBody ProductDto productDto) throws GroupNotFoundException {
-        Product product = productMapper.mapToProduct(productDto);
+        Product product = productMapper.mapToProductUpdate(productDto);
         Product updatedProduct = productService.saveProduct(product);
         return ResponseEntity.ok(productMapper.mapToProductDto(updatedProduct));
     }
