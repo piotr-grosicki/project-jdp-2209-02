@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
+import com.kodilla.ecommercee.domain.dto.ProductDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @NoArgsConstructor
 @Data
@@ -25,19 +27,20 @@ public class Order {
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    @NotNull
+
+    // @NotNull
     @Column(name = "ORDER_DATE")
     private LocalDate orderDate;
 
-    @NotNull
+    // @NotNull
     @Column(name = "IS_PAID")
     private boolean isPaid;
 
-    @NotNull
+    // @NotNull
     @Column(name = "ORDER_STATUS")
     private String orderStatus;
 
-    @NotNull
+    //  @NotNull
     @Column(name = "TOTAL_PRICE")
     private BigDecimal totalPrice;
 
@@ -45,4 +48,16 @@ public class Order {
     @JoinColumn(name= "CART_ID")
     private Cart cart;
 
+    public Order(LocalDate orderDate, boolean isPaid, String orderStatus, BigDecimal totalPrice) {
+        this.orderDate = orderDate;
+        this.isPaid = isPaid;
+        this.orderStatus = orderStatus;
+        this.totalPrice = totalPrice;
+    }
+
+    public Order(LocalDate orderDate, boolean isPaid, BigDecimal totalPrice) {
+        this.orderDate = orderDate;
+        this.isPaid = isPaid;
+        this.totalPrice = totalPrice;
+    }
 }

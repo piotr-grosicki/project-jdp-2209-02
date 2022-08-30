@@ -1,45 +1,54 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.dto.CartDto;
+import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.dto.OrderDto;
-import com.kodilla.ecommercee.domain.dto.ProductDto;
+import com.kodilla.ecommercee.exceptions.OrderNotFoundException;
+import com.kodilla.ecommercee.mapper.OrderMapper;
+import com.kodilla.ecommercee.service.OrderDbService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/v1/shop/orders")
+@RequiredArgsConstructor
 public class OrderController {
 
+    private final OrderDbService orderDbService;
+    private final OrderMapper orderMapper;
+
     @GetMapping
-    public List<OrderDto> getOrders(){
-        return new ArrayList<>();
+    public ResponseEntity<List<OrderDto>> getOrders(){
+        List<Order> orders = orderDbService.getAllOrders();
+        return ResponseEntity.ok(orderMapper.mapToOrderDtoList(orders));
     }
 
     @GetMapping(value = "{orderId}")
-    public OrderDto getOrder(@PathVariable int orderId){
-        CartDto cartDto = new CartDto(1L, 1L, 1L, new ArrayList<>());
-        List<ProductDto> productDtoList = new ArrayList<>();
-        ProductDto productDto = new ProductDto(1L,"productName","productDescription",1000);
-        cartDto.getProductDtoList().add(productDto);
-        return new OrderDto(1L, 1L, 1L, false, new BigDecimal(22.3), productDtoList);
+    public ResponseEntity<OrderDto> getOrder(@PathVariable long orderId) throws OrderNotFoundException {
+        Order order = orderDbService.getOrder(orderId);
+        return ResponseEntity.ok(orderMapper.mapToOrderDto(order));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createOrder(@RequestBody OrderDto orderDto){
-
+    public ResponseEntity<Void> createOrder(@RequestBody OrderDto orderDto){
+        Order order = orderMapper.mapToOrder(orderDto);
+        orderDbService.createOrder(order);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public OrderDto updateOrder(@RequestBody OrderDto orderDto){
-        CartDto cartDto = new CartDto(1L, 1L, 1L, new ArrayList<>());
-        List<ProductDto> productDtoList = new ArrayList<>();
-        ProductDto productDto = new ProductDto(1L,"productName","productDescription",1000);
-        cartDto.getProductDtoList().add(productDto);
-        return new OrderDto(1L, 1L, 1L, true, new BigDecimal(25.0), productDtoList);
+    public ResponseEntity<OrderDto> updateOrder(@RequestBody OrderDto orderDto){
+        Order order = orderMapper.mapToOrder(orderDto);
+        Order updatedOrder = orderDbService.createOrder(order);
+        return ResponseEntity.ok(orderMapper.mapToOrderDto(updatedOrder));
+    }
 
+    @DeleteMapping(value = "{orderId}")
+    public ResponseEntity<Void> deleteOrder(@PathVariable long orderId) throws OrderNotFoundException{
+        orderDbService.deleteOrder(orderId);
+        return ResponseEntity.ok().build();
     }
 }
