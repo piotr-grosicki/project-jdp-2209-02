@@ -29,7 +29,10 @@ public class ProductDbService {
         return productRepository.save(product);
     }
 
-    public void deleteProduct(final long productId) {
+    public void deleteProduct(final long productId) throws ProductNotFoundException {
+        if (!productRepository.existsById(productId)){
+            throw new ProductNotFoundException();
+        }
         productRepository.deleteById(productId);
     }
 
