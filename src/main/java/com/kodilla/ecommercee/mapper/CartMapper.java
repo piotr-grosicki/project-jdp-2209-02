@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,8 +30,7 @@ public class CartMapper {
     OrderRepository orderRepository;
 
     public CartDto mapToCartDto(final Cart cart) {
-        return new CartDto(cart.getId(),
-                cart.getUser().getId());
+        return new CartDto(cart.getId());
     }
 
     public Cart mapToCart(final CartDto cartDto) {
@@ -38,20 +38,9 @@ public class CartMapper {
                 userRepository.findById(cartDto.getUserId()).orElse(null));
     }
 
-//    public Product mapToProduct(final ProductDto productDto) {
-//        return new Product(
-//                productDto.getId(),
-//                productDto.get,
-//
-//        )
-//    }
     public List<CartDto> mapToCartDtoList(List<Cart> cartList){
         return cartList.stream()
                 .map(this::mapToCartDto)
                 .collect(Collectors.toList());
-    }
-
-    public List<Product> mapToProductList(List<ProductDto> productDtoList) {
-        return
     }
 }

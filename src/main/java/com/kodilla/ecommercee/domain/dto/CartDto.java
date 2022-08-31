@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class CartDto {
 
-    public CartDto(long id, long userId) {
+    public CartDto(Long id) {
         this.id = id;
         this.userId = userId;
     }

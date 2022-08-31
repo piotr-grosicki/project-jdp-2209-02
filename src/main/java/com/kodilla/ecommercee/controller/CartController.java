@@ -5,7 +5,10 @@ import com.kodilla.ecommercee.domain.dto.CartDto;
 import com.kodilla.ecommercee.domain.dto.OrderDto;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
 import com.kodilla.ecommercee.mapper.CartMapper;
+import com.kodilla.ecommercee.mapper.ProductMapper;
+import com.kodilla.ecommercee.repository.ProductRepository;
 import com.kodilla.ecommercee.service.CartService;
+import com.kodilla.ecommercee.service.ProductDbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +24,10 @@ public class CartController {
     CartService service;
     @Autowired
     CartMapper cartMapper;
+    @Autowired
+    ProductMapper productMapper;
+    @Autowired
+    ProductDbService productDbService;
 
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -29,6 +36,7 @@ public class CartController {
         service.saveCart(cart);
         return ResponseEntity.ok().build();
     }
+
 
     @GetMapping
     public ResponseEntity<List<CartDto>> getCarts() {
@@ -41,22 +49,12 @@ public class CartController {
         return ResponseEntity.ok(cartMapper.mapToCartDto(service.getCart(cartId)));
     }
 
-    @PutMapping(value = "{cartId}")
+    @PutMapping(value = "{cartId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> putProductIntoCart(@PathVariable CartDto cartId,
-                                                   @RequestBody ProductDto productDto) throws Exception {
+                                                   @RequestBody Long id) throws Exception {
         Cart cart = cartMapper.mapToCart(cartId);
-        cart.getProducts().add(cartMapper.);
+        cart.getProducts().add(productDbService.getProductById(id));
         service.saveCart(cart);
         return ResponseEntity.ok().build();
     }
-
-
-
-//    @PutMapping(value = "{cartId/orderID}")
-//    public ResponseEntity<Void> putCartIntoOrder(@RequestBody OrderDto orderDto,
-//                                                 @PathVariable CartDto cartId) throws Exception {
-//        Cart cart = cartMapper.mapToCart(cartId);
-//        cart.setOrder(orderDto.);
-//        return;
-//    }
 }
