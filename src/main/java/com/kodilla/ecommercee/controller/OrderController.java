@@ -41,11 +41,15 @@ public class OrderController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping
-    public ResponseEntity<OrderDto> updateOrder(@RequestBody OrderDto orderDto) throws UserNotFoundException, CartNotFoundException {
-        Order order = orderMapper.mapToOrder(orderDto);
-        Order updatedOrder = orderDbService.createOrder(order);
-        return ResponseEntity.ok(orderMapper.mapToOrderDto(updatedOrder));
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<OrderDto> updateOrder(@RequestBody OrderDto orderDto) throws UserNotFoundException, CartNotFoundException, OrderNotFoundException {
+        return ResponseEntity.ok(
+                orderMapper.mapToOrderDto(
+                        orderDbService.updateOrder(
+                                orderMapper.mapToOrder(orderDto)
+                        )
+                )
+        );
     }
 
     @DeleteMapping(value = "{orderId}")

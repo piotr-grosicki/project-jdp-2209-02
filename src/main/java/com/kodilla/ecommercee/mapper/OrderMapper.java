@@ -25,12 +25,13 @@ public class OrderMapper {
 
     public Order mapToOrder(final OrderDto orderDto) throws UserNotFoundException, CartNotFoundException {
         return new Order(
+                orderDto.getId(),
                 userDbService.getUser(orderDto.getUserId()),
                 orderDto.getOrderDate(),
                 orderDto.isPaid(),
                 orderDto.getOrderStatus(),
                 orderDto.getTotalPrice(),
-                cartDbService.getCart(orderDto.getId())
+                cartDbService.getCart(orderDto.getCartId())
         );
     }
 

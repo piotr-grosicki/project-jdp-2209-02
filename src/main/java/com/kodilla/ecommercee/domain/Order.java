@@ -47,14 +47,15 @@ public class Order {
     @JoinColumn(name= "CART_ID")
     private Cart cart;
 
-    public Order(User user, LocalDate orderDate, boolean isPaid, String orderStatus, BigDecimal totalPrice, Cart cart) {
+    /*public Order(long id, User user, LocalDate orderDate, boolean isPaid, String orderStatus, BigDecimal totalPrice, Cart cart) {
+        this.id = id;
         this.user = user;
         this.orderDate = orderDate;
         this.isPaid = isPaid;
         this.orderStatus = orderStatus;
         this.totalPrice = totalPrice;
         this.cart = cart;
-    }
+    }*/
 
     public Order(LocalDate orderDate, boolean isPaid, String orderStatus, BigDecimal totalPrice) {
         this.orderDate = orderDate;
