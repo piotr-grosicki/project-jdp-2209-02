@@ -2,8 +2,8 @@ package com.kodilla.ecommercee.service;
 
 import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.domain.dto.UserDto;
-import com.kodilla.ecommercee.exception.UserLoginAlreadyExistsException;
-import com.kodilla.ecommercee.exception.UserNotFoundException;
+import com.kodilla.ecommercee.exceptions.UserExistsException;
+import com.kodilla.ecommercee.exceptions.UserNotFoundException;
 import com.kodilla.ecommercee.mapper.UserMapper;
 import com.kodilla.ecommercee.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -21,10 +21,10 @@ public class UserService {
         return userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
     }
 
-    public UserDto createUser(UserDto userDto) throws UserLoginAlreadyExistsException {
+    public UserDto createUser(UserDto userDto) throws UserExistsException {
         User user = userMapper.mapToUser(userDto);
         if (isLoginTaken(userDto.getLogin())) {
-            throw new UserLoginAlreadyExistsException();
+            throw new UserExistsException();
         }
         user = userRepository.save(user);
         return userMapper.mapToUserDto(user);
