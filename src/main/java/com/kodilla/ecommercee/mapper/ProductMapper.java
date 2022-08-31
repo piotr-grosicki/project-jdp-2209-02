@@ -14,20 +14,21 @@ import java.util.stream.Collectors;
 public class ProductMapper {
 
     @Autowired
-    private GroupDbService groupService;
+    private GroupDbService groupDbService;
 
-    public Product mapToProduct(final ProductDto productDto) throws GroupNotFoundException {
+    public Product mapToNewProduct(final ProductDto productDto) throws GroupNotFoundException {
         return new Product(
-                groupService.getGroup(productDto.getGroupId()),
+                groupDbService.getGroupById(productDto.getGroupId()),
                 productDto.getProductName(),
                 productDto.getProductDescription(),
                 productDto.getProductPrice()
         );
     }
-    public Product mapToProductUpdate(final ProductDto productDto) throws GroupNotFoundException {
+
+    public Product mapToProduct(final ProductDto productDto) throws GroupNotFoundException {
         return new Product(
                 productDto.getProductId(),
-                groupService.getGroup(productDto.getGroupId()),
+                groupDbService.getGroupById(productDto.getGroupId()),
                 productDto.getProductName(),
                 productDto.getProductDescription(),
                 productDto.getProductPrice()

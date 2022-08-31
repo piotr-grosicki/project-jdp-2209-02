@@ -12,8 +12,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 @NoArgsConstructor
-@Data
 @AllArgsConstructor
+@Data
 @Entity(name = "ORDERS")
 public class Order {
 

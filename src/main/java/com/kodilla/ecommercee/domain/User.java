@@ -10,9 +10,9 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.UUID;
 
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Data
 @Entity(name = "USERS")
 public class User {
     @Id
