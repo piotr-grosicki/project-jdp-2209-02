@@ -4,7 +4,6 @@ import com.kodilla.ecommercee.repository.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 
 import java.math.BigDecimal;
@@ -50,7 +49,7 @@ public class UserTestSuite {
         assertEquals(user.isBlocked(), userRepository.findById(savedUser.getId()).get().isBlocked());
 
         //cleanup
-        userRepository.deleteById(savedUser.getId());
+        userRepository.delete(savedUser);
     }
 
     @Test
@@ -77,9 +76,9 @@ public class UserTestSuite {
         System.out.println(savedUser3);
 
         //cleanup
-        userRepository.deleteById(savedUser1.getId());
-        userRepository.deleteById(savedUser2.getId());
-        userRepository.deleteById(savedUser3.getId());
+        userRepository.delete(savedUser1);
+        userRepository.delete(savedUser2);
+        userRepository.delete(savedUser3);
     }
 
     @Test
@@ -99,7 +98,7 @@ public class UserTestSuite {
         assertEquals(savedUser1,savedUser2);
 
         //cleanup
-        userRepository.deleteById(savedUser2.getId());
+        userRepository.delete(savedUser2);
     }
 
     @Test
@@ -142,60 +141,74 @@ public class UserTestSuite {
     }
 
     @Test
-    void testUserSaveWithData(){
+    void testDeleteCartLeaveUser(){
         //given
-        Group group = new Group("grupa","opisgrupy");
-        group = groupRepository.save(group);
-        System.out.println("GROUP: " + group);
-
-        Product product1 = new Product(group,"produkt1", "opis1", BigDecimal.valueOf(12.35));
-        Product product2 = new Product(group,"produkt2", "opis2", BigDecimal.valueOf(67.89));
-        product1 = productRepository.save(product1);
-        product2 = productRepository.save(product2);
-
-        System.out.println("PRODUCT1: " + product1);
-        System.out.println("PRODUCT2: " + product2);
-
         User user = new User(0L, "login", "user@domain.com", "address", false, null);
-        //user = userRepository.save(user);
-        System.out.println("USER: " + user);
+        user = userRepository.save(user);
 
         Cart cart = new Cart(0L, new ArrayList<>(), user);
-//        cart.getProducts().add(product1);
-//        cart.getProducts().add(product2);
         cart = cartRepository.save(cart);
-        System.out.println("CART:" + cart);
-        System.out.println("USER: " + user);
+
+        //when
         cartRepository.delete(cart);
-        System.out.println("USER: " + user);
 
-
-//        Order order = new Order();
-//        order.setId(1L);
-//        order.setUser(user);
-//        order.setCart(cart);
-//        order = orderRepository.save(order);
-//
-//        user.getOrders().add(order);
-//        user = userRepository.save(user);
-//
-//        System.out.println(userRepository.findById(user.getId()).get().getOrders().get(0).getId());
-//        System.out.println(userRepository.findById(user.getId()).get().getOrders().get(0).getCart().getProducts());
-//        System.out.println(user.getOrders().get(0).getCart().getProducts());
-
+        //then
+        assertEquals(1,userRepository.findAll().size());
 
         //cleanup
-        //cartRepository.deleteById(cart.getId());
-
-//        productRepository.deleteById(product1.getId());
-//        productRepository.deleteById(product2.getId());
-//        groupRepository.deleteById(group.getId());
-
-
-        //userRepository.deleteById(user.getId());
-
-
-//        orderRepository.deleteById(order.getId());
+        userRepository.delete(user);
     }
+
+//    @Test
+//    void testUserSaveWithData(){
+//        //given
+//        Group group = new Group("grupa","opisgrupy");
+//        group = groupRepository.save(group);
+//        System.out.println("GROUP: " + group);
+//
+//        Product product1 = new Product(group,"produkt1", "opis1", BigDecimal.valueOf(12.35));
+//        Product product2 = new Product(group,"produkt2", "opis2", BigDecimal.valueOf(67.89));
+//        product1 = productRepository.save(product1);
+//        product2 = productRepository.save(product2);
+//
+//        System.out.println("PRODUCT1: " + product1);
+//        System.out.println("PRODUCT2: " + product2);
+//
+//        User user = new User(0L, "login", "user@domain.com", "address", false, null);
+//        user = userRepository.save(user);
+//
+//        Cart cart = new Cart(0L, new ArrayList<>(), user);
+//        cart.getProducts().add(product1);
+//        cart.getProducts().add(product2);
+//        cart = cartRepository.save(cart);
+//
+//        System.out.println("CART:" + cart);
+//        System.out.println("USER: " + user);
+//
+//
+////        Order order = new Order();
+////        order.setId(1L);
+////        order.setUser(user);
+////        order.setCart(cart);
+////        order = orderRepository.save(order);
+////
+////        user.getOrders().add(order);
+////        user = userRepository.save(user);
+////
+////        System.out.println(userRepository.findById(user.getId()).get().getOrders().get(0).getId());
+////        System.out.println(userRepository.findById(user.getId()).get().getOrders().get(0).getCart().getProducts());
+////        System.out.println(user.getOrders().get(0).getCart().getProducts());
+//
+//
+//        //cleanup
+//        productRepository.delete(product1);
+//        productRepository.delete(product2);
+//        groupRepository.delete(group);
+//        cartRepository.delete(cart);
+//        userRepository.delete(user);
+//
+//
+////        orderRepository.deleteById(order.getId());
+//    }
 
 }

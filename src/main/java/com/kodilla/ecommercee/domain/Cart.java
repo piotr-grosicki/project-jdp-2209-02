@@ -21,10 +21,10 @@ public class Cart {
     @Column(name = "ID", unique = true)
     private long id;
 
-    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "carts")
+    @ManyToMany(cascade = CascadeType.MERGE,mappedBy = "carts")
     private List<Product> products;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name= "USERS_ID")
     private User user;
 
