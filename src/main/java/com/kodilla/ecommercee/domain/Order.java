@@ -27,20 +27,19 @@ public class Order {
     @JoinColumn(name = "USER_ID")
     private User user;
 
-
-    // @NotNull
+   // @NotNull
     @Column(name = "ORDER_DATE")
     private LocalDate orderDate;
 
-    // @NotNull
+   // @NotNull
     @Column(name = "IS_PAID")
     private boolean isPaid;
 
-    // @NotNull
+   // @NotNull
     @Column(name = "ORDER_STATUS")
     private String orderStatus;
 
-    //  @NotNull
+  //  @NotNull
     @Column(name = "TOTAL_PRICE")
     private BigDecimal totalPrice;
 
@@ -48,16 +47,19 @@ public class Order {
     @JoinColumn(name= "CART_ID")
     private Cart cart;
 
-    public Order(LocalDate orderDate, boolean isPaid, String orderStatus, BigDecimal totalPrice) {
+    public Order(User user, LocalDate orderDate, boolean isPaid, String orderStatus, BigDecimal totalPrice, Cart cart) {
+        this.user = user;
         this.orderDate = orderDate;
         this.isPaid = isPaid;
         this.orderStatus = orderStatus;
         this.totalPrice = totalPrice;
+        this.cart = cart;
     }
 
-    public Order(LocalDate orderDate, boolean isPaid, BigDecimal totalPrice) {
+    public Order(LocalDate orderDate, boolean isPaid, String orderStatus, BigDecimal totalPrice) {
         this.orderDate = orderDate;
         this.isPaid = isPaid;
+        this.orderStatus = orderStatus;
         this.totalPrice = totalPrice;
     }
 }

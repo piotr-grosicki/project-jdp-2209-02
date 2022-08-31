@@ -4,8 +4,10 @@ import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.exceptions.OrderNotFoundException;
 import com.kodilla.ecommercee.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -23,6 +25,7 @@ public class OrderDbService {
     }
 
     public Order createOrder(final Order order) {
+        order.setOrderDate(LocalDate.now());
         return orderRepository.save(order);
     }
 
