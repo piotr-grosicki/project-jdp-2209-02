@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,8 +11,4 @@ public class GroupDto {
     private Long id;
     private String name;
     private String description;
-    public GroupDto(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
 }

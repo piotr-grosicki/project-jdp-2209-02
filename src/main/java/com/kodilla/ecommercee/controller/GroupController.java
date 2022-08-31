@@ -5,7 +5,7 @@ import com.kodilla.ecommercee.domain.dto.GroupDto;
 import com.kodilla.ecommercee.exceptions.GroupNotFoundException;
 import com.kodilla.ecommercee.mapper.GroupMapper;
 import com.kodilla.ecommercee.service.GroupDbService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +14,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/shop/groups")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class GroupController {
 
-    private GroupMapper groupMapper;
-
-    private GroupDbService groupDbService;
+    private final GroupMapper groupMapper;
+    private final GroupDbService groupDbService;
 
     @GetMapping
     public ResponseEntity<List<GroupDto>> getGroups() {

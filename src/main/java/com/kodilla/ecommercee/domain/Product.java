@@ -16,8 +16,7 @@ import java.util.List;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
+    @GeneratedValue
     @Column(name = "PRODUCT_ID", unique = true)
     private long id;
 
@@ -25,15 +24,15 @@ public class Product {
     @JoinColumn(name = "GROUP_ID")
     private Group group;
 
-//    @NotNull
+    @NotNull
     @Column(name = "PRODUCT_NAME")
     private String name;
 
-//    @NotNull
+    @NotNull
     @Column(name = "PRODUCT_DESCRIPTION")
     private String description;
 
-//    @NotNull
+    @NotNull
     @Column(name = "PRICE")
     private BigDecimal price;
 

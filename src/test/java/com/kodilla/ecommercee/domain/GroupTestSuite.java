@@ -1,6 +1,5 @@
 package com.kodilla.ecommercee.domain;
 
-import com.kodilla.ecommercee.exceptions.GroupNotFoundException;
 import com.kodilla.ecommercee.repository.GroupRepository;
 
 import com.kodilla.ecommercee.repository.ProductRepository;
@@ -29,8 +28,8 @@ class GroupTestSuite {
 
     @Test
     void testAddGroup() {
-        Group group = new Group(GROUP_NAME, GROUP_DESC, new ArrayList<>());
-        Group group1 = new Group(GROUP_NAME + "2", GROUP_DESC + "2", new ArrayList<>());
+        Group group = new Group(GROUP_NAME, GROUP_DESC);
+        Group group1 = new Group(GROUP_NAME + "2", GROUP_DESC + "2");
 
         groupRepository.save(group);
         groupRepository.save(group1);
@@ -48,7 +47,7 @@ class GroupTestSuite {
     @Test
     void testGroupSaveWithProducts() {
         //Given
-        Group group = new Group(GROUP_NAME, GROUP_DESC, new ArrayList<>());
+        Group group = new Group(GROUP_NAME, GROUP_DESC);
         Product product = new Product(group, "name test 1","Name test 1", new BigDecimal("130.5"));
         Product product1 = new Product(group,"name test 2", "Descriptions test 2", new BigDecimal("150.5"));
         group.getProductList().add(product);
@@ -77,7 +76,7 @@ class GroupTestSuite {
 
     @Test
     void testGetGroupById() {
-        Group group = new Group(GROUP_NAME, GROUP_DESC, new ArrayList<>());
+        Group group = new Group(GROUP_NAME, GROUP_DESC);
 
         groupRepository.save(group);
         long id = group.getId();

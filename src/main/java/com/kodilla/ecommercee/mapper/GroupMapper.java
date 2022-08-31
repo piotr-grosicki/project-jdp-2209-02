@@ -14,8 +14,7 @@ public class GroupMapper {
     public Group mapToNewGroup(GroupDto groupDto) {
         return new Group(
                 groupDto.getName(),
-                groupDto.getDescription(),
-                new ArrayList<>()
+                groupDto.getDescription()
         );
     }
 
@@ -23,8 +22,7 @@ public class GroupMapper {
         return new Group(
                 groupDto.getId(),
                 groupDto.getName(),
-                groupDto.getDescription(),
-                new ArrayList<>()
+                groupDto.getDescription()
         );
     }
 

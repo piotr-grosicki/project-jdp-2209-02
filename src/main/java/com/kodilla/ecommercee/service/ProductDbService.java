@@ -14,12 +14,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductDbService {
 
-    private ProductRepository productRepository;
-
     @Autowired
-    public ProductDbService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+    private ProductRepository productRepository;
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
