@@ -8,5 +8,5 @@ import javax.transaction.Transactional;
 
 @Transactional
 @Repository
-public interface UserRepository extends CrudRepository<User,Long> {
+public interface UserRepository extends CrudRepository<User, Long> {
 }

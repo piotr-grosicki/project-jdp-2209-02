@@ -1,33 +1,51 @@
 package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.domain.dto.GroupDto;
+import com.kodilla.ecommercee.exceptions.GroupNotFoundException;
+import com.kodilla.ecommercee.mapper.GroupMapper;
+import com.kodilla.ecommercee.service.GroupDbService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/v1/shop/groups")
+@RequiredArgsConstructor
 public class GroupController {
 
+    private final GroupMapper groupMapper;
+    private final GroupDbService groupDbService;
+
     @GetMapping
-    public List<GroupDto> getGroups() {
-        return new ArrayList<>();
+    public ResponseEntity<List<GroupDto>> getGroups() {
+        List<Group> groups = groupDbService.getAllGroups();
+        return ResponseEntity.ok(groupMapper.mapToTaskDtoList(groups));
     }
 
     @GetMapping(value = "{groupId}")
-    public GroupDto getGroupById(@PathVariable Long groupId) {
-        return new GroupDto(1L,"group name","group description");
+    public ResponseEntity<GroupDto> getGroupById(@PathVariable Long groupId) throws GroupNotFoundException {
+        Group group = groupDbService.getGroupById(groupId);
+        return ResponseEntity.ok(groupMapper.mapToGroupDto(group));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createGroup(@RequestBody GroupDto groupDto) {
-
+    public ResponseEntity<Void> createGroup(@RequestBody GroupDto groupDto) {
+        groupDbService.saveGroup(groupMapper.mapToNewGroup(groupDto));
+        return ResponseEntity.ok().build();
     }
 
-    @PutMapping
-    public GroupDto updateGroup(@RequestBody GroupDto groupDto) {
-        return new GroupDto(1L,"Updated group name","Updated group description");
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<GroupDto> updateGroup(@RequestBody GroupDto groupDto) throws GroupNotFoundException {
+        return ResponseEntity.ok(
+                groupMapper.mapToGroupDto(
+                        groupDbService.updateGroup(
+                                groupMapper.mapToGroup(groupDto)
+                        )
+                )
+        );
     }
 }

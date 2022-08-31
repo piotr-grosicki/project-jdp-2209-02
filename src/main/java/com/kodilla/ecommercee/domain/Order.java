@@ -10,14 +10,14 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @NoArgsConstructor
-@Data
 @AllArgsConstructor
+@Data
 @Entity(name = "ORDERS")
 public class Order {
 
     @Id
     @GeneratedValue
-    @NotNull
+//    @NotNull
     @Column(name = "ID", unique = true)
     private long id;
 
