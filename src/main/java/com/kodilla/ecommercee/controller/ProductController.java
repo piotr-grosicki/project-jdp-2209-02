@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("v1/shop/products")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class ProductController {
 
     private final ProductDbService productService;
@@ -40,6 +41,7 @@ public class ProductController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+
     public ResponseEntity<ProductDto> updateProduct(@RequestBody ProductDto productDto) throws GroupNotFoundException, ProductNotFoundException {
         return ResponseEntity.ok(
                 productMapper.mapToProductDto(
@@ -52,6 +54,7 @@ public class ProductController {
 
     @DeleteMapping(value = "{productId}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long productId) throws ProductNotFoundException {
+
         productService.deleteProduct(productId);
         return ResponseEntity.ok().build();
     }

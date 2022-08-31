@@ -45,21 +45,16 @@ public class Product {
     )
     private List<Cart> carts;
 
-    public Product(String name, String description, BigDecimal price) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-    }
-
-    public Product(Group group, String name, String description, BigDecimal price) {
+    public Product(long id, Group group, String name, String description, BigDecimal price) {
+        this.id = id;
         this.group = group;
         this.name = name;
         this.description = description;
         this.price = price;
     }
 
-    public Product(long id, Group group, String name, String description, BigDecimal price) {
-        this.id = id;
+
+    public Product(Group group, String name, String description, BigDecimal price) {
         this.group = group;
         this.name = name;
         this.description = description;
