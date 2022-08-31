@@ -23,7 +23,7 @@ public class OrderController {
     private final OrderMapper orderMapper;
 
     @GetMapping
-    public ResponseEntity<List<OrderDto>> getOrders() throws Exception {
+    public ResponseEntity<List<OrderDto>> getOrders() {
         List<Order> orders = orderDbService.getAllOrders();
         return ResponseEntity.ok(orderMapper.mapToOrderDtoList(orders));
     }

@@ -17,19 +17,19 @@ import java.util.UUID;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
+    //@NotNull
     @Column(name = "ID", unique = true)
     private Long id;
-    @NotNull
+    //@NotNull
     @Column(name = "LOGIN")
     private String login;
-    @NotNull
+    //@NotNull
     @Column(name = "mail")
     private String mail;
-    @NotNull
+    //@NotNull
     @Column(name = "ADDRESS")
     private String address;
-    @NotNull
+    //@NotNull
     @Column(name = "IS_BLOCKED")
     private boolean isBlocked;
     @Column(name = "USER_KEY")

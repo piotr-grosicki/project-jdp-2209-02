@@ -19,7 +19,7 @@ public class Order {
 
     @Id
     @GeneratedValue
-    @NotNull
+    //@NotNull
     @Column(name = "ID", unique = true)
     private long id;
 
