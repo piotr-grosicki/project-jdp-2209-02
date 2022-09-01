@@ -52,4 +52,12 @@ public class Order {
         this.orderStatus = orderStatus;
         this.totalPrice = totalPrice;
     }
+
+    public Order(User user, boolean isPaid, String orderStatus, BigDecimal totalPrice) {
+        this.user = user;
+        this.orderDate = LocalDate.now();
+        this.isPaid = isPaid;
+        this.orderStatus = orderStatus;
+        this.totalPrice = totalPrice;
+    }
 }
