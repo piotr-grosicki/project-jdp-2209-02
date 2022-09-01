@@ -20,5 +20,15 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleGroupNotFoundException(GroupNotFoundException exception) {
         return new ResponseEntity<>("Group with given id doesn't exist", HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Object> handlerUserNotFoundException(UserNotFoundException exception) {
+        return new ResponseEntity<>("User with this ID do not exist", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UserExistsException.class)
+    public ResponseEntity<Object> handlerUserLoginExistsException(UserExistsException exception) {
+        return new ResponseEntity<>("User already exists", HttpStatus.BAD_REQUEST);
+    }
     
 }

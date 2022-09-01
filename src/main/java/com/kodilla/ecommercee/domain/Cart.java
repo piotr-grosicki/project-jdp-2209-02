@@ -26,7 +26,7 @@ public class Cart {
             mappedBy = "carts")
     private List<Product> products;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name= "USERS_ID")
     private User user;
 
