@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,7 +40,6 @@ public class User {
     @OneToMany(
             targetEntity = Order.class,
             mappedBy = "user",
-            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     private List<Order> orders;
@@ -51,6 +51,15 @@ public class User {
         this.address = address;
         this.isBlocked = isBlocked;
         this.userKey = userKey;
+    }
+
+    public User(String login, String mail, String address, boolean isBlocked, UUID userKey, LocalTime lastLogin) {
+        this.login = login;
+        this.mail = mail;
+        this.address = address;
+        this.isBlocked = isBlocked;
+        this.userKey = userKey;
+        this.lastLogin = lastLogin;
     }
 }
 
