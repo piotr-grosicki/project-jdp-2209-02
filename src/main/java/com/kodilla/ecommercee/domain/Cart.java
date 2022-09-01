@@ -1,8 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,12 +10,11 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Entity(name = "CARTS")
-
 public class Cart {
 
     @Id
     @GeneratedValue
-    @NotNull
+    //@NotNull
     @Column(name = "ID", unique = true)
     private long id;
 

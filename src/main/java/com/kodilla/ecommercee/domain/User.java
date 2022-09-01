@@ -52,7 +52,7 @@ public class User {
         this.isBlocked = isBlocked;
         this.userKey = userKey;
     }
-
+    
     public User(String login, String mail, String address, boolean isBlocked, UUID userKey, LocalTime lastLogin) {
         this.login = login;
         this.mail = mail;
@@ -62,6 +62,3 @@ public class User {
         this.lastLogin = lastLogin;
     }
 }
-
-
-

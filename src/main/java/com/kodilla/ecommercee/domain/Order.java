@@ -17,14 +17,13 @@ public class Order {
 
     @Id
     @GeneratedValue
-//    @NotNull
+    //@NotNull
     @Column(name = "ID", unique = true)
     private long id;
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User user;
-
 
    // @NotNull
     @Column(name = "ORDER_DATE")
@@ -48,6 +47,14 @@ public class Order {
 
     public Order(LocalDate orderDate, boolean isPaid, String orderStatus, BigDecimal totalPrice) {
         this.orderDate = orderDate;
+        this.isPaid = isPaid;
+        this.orderStatus = orderStatus;
+        this.totalPrice = totalPrice;
+    }
+
+    public Order(User user, boolean isPaid, String orderStatus, BigDecimal totalPrice) {
+        this.user = user;
+        this.orderDate = LocalDate.now();
         this.isPaid = isPaid;
         this.orderStatus = orderStatus;
         this.totalPrice = totalPrice;
