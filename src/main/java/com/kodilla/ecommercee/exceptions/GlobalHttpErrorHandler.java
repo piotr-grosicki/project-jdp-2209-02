@@ -35,4 +35,9 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException exception) {
         return new ResponseEntity<>("User with given id doesn't exist", HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(UserExistsException.class)
+    public ResponseEntity<Object> handlerUserLoginExistsException(UserExistsException exception) {
+        return new ResponseEntity<>("User already exists", HttpStatus.BAD_REQUEST);
+    }
 }
