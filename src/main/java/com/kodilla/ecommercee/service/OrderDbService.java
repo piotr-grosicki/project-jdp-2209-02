@@ -39,28 +39,8 @@ public class OrderDbService {
         }
     }
 
-    public Order updateOrder(Order order) throws OrderNotFoundException {
-        Order updatedOrder = getOrder(order.getId());
-        if (order.getUser() != null) {
-            updatedOrder.setUser(order.getUser());
-        }
-        if (order.getOrderDate() != null) {
-            updatedOrder.setOrderDate(order.getOrderDate());
-        }
-        if (order.getOrderStatus() != null) {
-            updatedOrder.setOrderStatus(order.getOrderStatus());
-        }
-        if (order.getTotalPrice() != null) {
-            updatedOrder.setTotalPrice(order.getTotalPrice());
-        }
-        if (order.getCart() != null) {
-            updatedOrder.setCart(order.getCart());
-        }
-        if (order.isPaid()) {
-            updatedOrder.setPaid(true);
-        } else {
-            updatedOrder.setPaid(false);
-        }
-        return orderRepository.save(updatedOrder);
+    public Order saveOrder(final Order order){
+        return orderRepository.save(order);
     }
+
 }

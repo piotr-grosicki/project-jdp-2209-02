@@ -31,4 +31,8 @@ public class OrderDto {
         this.totalPrice = totalPrice;
         this.productDtoList = productDtoList;
     }
+
+    public boolean getIsPaid(){
+        return isPaid;
+    }
 }

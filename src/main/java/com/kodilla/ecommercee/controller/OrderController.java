@@ -45,7 +45,7 @@ public class OrderController {
     public ResponseEntity<OrderDto> updateOrder(@RequestBody OrderDto orderDto) throws UserNotFoundException, CartNotFoundException, OrderNotFoundException {
         return ResponseEntity.ok(
                 orderMapper.mapToOrderDto(
-                        orderDbService.updateOrder(
+                        orderDbService.saveOrder(
                                 orderMapper.mapToOrder(orderDto)
                         )
                 )

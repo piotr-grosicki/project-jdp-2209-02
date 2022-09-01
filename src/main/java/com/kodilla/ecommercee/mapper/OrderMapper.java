@@ -28,7 +28,7 @@ public class OrderMapper {
                 orderDto.getId(),
                 userDbService.getUser(orderDto.getUserId()),
                 orderDto.getOrderDate(),
-                orderDto.isPaid(),
+                orderDto.getIsPaid(),
                 orderDto.getOrderStatus(),
                 orderDto.getTotalPrice(),
                 cartDbService.getCart(orderDto.getCartId())
