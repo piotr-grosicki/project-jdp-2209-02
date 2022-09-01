@@ -1,9 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,14 +8,12 @@ import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 @Entity(name = "GROUPS")
 public class Group {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
+    @GeneratedValue
     @Column(name = "ID", unique = true)
     private long id;
 
@@ -33,18 +28,18 @@ public class Group {
     @OneToMany(
             targetEntity = Product.class,
             mappedBy = "group",
-            cascade = CascadeType.MERGE,
-            fetch = FetchType.LAZY
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
     )
     private List<Product> productList;
 
-    public Group(String name, String description, List<Product> productList) {
+    public Group(String name, String description) {
         this.name = name;
         this.description = description;
-        this.productList = productList;
     }
-    
-    public Group(String name, String description) {
+
+    public Group(long id, String name, String description) {
+        this.id = id;
         this.name = name;
         this.description = description;
     }

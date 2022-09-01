@@ -25,12 +25,35 @@ public class ProductDbService {
         return productRepository.findById(productId).orElseThrow(ProductNotFoundException::new);
     }
 
-    public Product saveProduct(final Product product) {
-        return productRepository.save(product);
+    public void saveProduct(final Product product) {
+        productRepository.save(product);
     }
 
-    public void deleteProduct(final long productId) {
+    public void deleteProduct(final long productId) throws ProductNotFoundException {
+        if (!productRepository.existsById(productId)){
+            throw new ProductNotFoundException();
+        }
         productRepository.deleteById(productId);
+    }
+
+    public Product updateProduct(final Product product) throws ProductNotFoundException {
+        Product productToUpdate = getProductById(product.getId());
+        if (product.getGroup() != null) {
+            productToUpdate.setGroup(product.getGroup());
+        }
+        if (product.getName() != null) {
+            productToUpdate.setName(product.getName());
+        }
+        if (product.getDescription() != null) {
+            productToUpdate.setDescription(product.getDescription());
+        }
+        if (product.getPrice() != null) {
+            productToUpdate.setPrice(product.getPrice());
+        }
+        if (product.getCarts() != null) {
+            productToUpdate.setCarts(product.getCarts());
+        }
+        return productRepository.save(productToUpdate);
     }
 
     public List<Product> getProductsByGroup(final Group group) {

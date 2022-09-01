@@ -16,13 +16,12 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto) throws UserExistsException {
         return ResponseEntity.ok(userService.createUser(userDto));
     }
-
     @PutMapping(value = "/changeStatus/{userId}")
     public ResponseEntity<UserDto> changeUserStatus(@PathVariable long userId) throws UserNotFoundException {
         return ResponseEntity.ok(userService.changeUserStatus(userId));

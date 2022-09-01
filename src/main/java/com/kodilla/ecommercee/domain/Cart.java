@@ -21,7 +21,9 @@ public class Cart {
     @Column(name = "ID", unique = true)
     private long id;
 
-    @ManyToMany(cascade = CascadeType.MERGE,mappedBy = "carts")
+    @ManyToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            mappedBy = "carts")
     private List<Product> products;
 
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
