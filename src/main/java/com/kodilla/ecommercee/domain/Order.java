@@ -17,14 +17,13 @@ public class Order {
 
     @Id
     @GeneratedValue
-//    @NotNull
+    //@NotNull
     @Column(name = "ID", unique = true)
     private long id;
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User user;
-
 
    // @NotNull
     @Column(name = "ORDER_DATE")

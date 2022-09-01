@@ -48,7 +48,6 @@ public class CartController {
         ProductDto productDto = new ProductDto(1L, 1L, "productName", "productDescription", new BigDecimal(1000));
         CartDto cartDto = new CartDto(cartId, 1L, 1L, productDtoList);
         cartDto.getProductDtoList().add(productDto);
-
-        new OrderDto(1L, 1L, 1L, true, new BigDecimal(22.10), productDtoList);
+        new OrderDto(1L, 1L , 1L ,true,"status", new BigDecimal(22.10),productDtoList);
     }
 }
