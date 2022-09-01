@@ -16,11 +16,6 @@ import java.util.List;
 
 public class Cart {
 
-    public Cart(long id, User user) {
-        this.id = id;
-        this.user = user;
-    }
-
     @Id
     @GeneratedValue
     @NotNull

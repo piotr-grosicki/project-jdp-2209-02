@@ -29,13 +29,21 @@ public class CartMapper {
     @Autowired
     OrderRepository orderRepository;
 
+    @Autowired
+    ProductMapper productMapper;
+
     public CartDto mapToCartDto(final Cart cart) {
-        return new CartDto(cart.getId());
+        return new CartDto(cart.getId(),
+                cart.getUser().getId(),
+                cart.getOrder().getId(),
+                productMapper.mapToProductDtoList(cart.getProducts()));
     }
 
     public Cart mapToCart(final CartDto cartDto) {
         return new Cart(cartDto.getId(),
-                userRepository.findById(cartDto.getUserId()).orElse(null));
+                userRepository.findById(cartDto.getUserId()),
+                orderRepository.findById(cartDto.getOrderId()),
+                productMapper.mapToProductList(cartDto.getProductDtoList()));
     }
 
     public List<CartDto> mapToCartDtoList(List<Cart> cartList){
@@ -43,4 +51,10 @@ public class CartMapper {
                 .map(this::mapToCartDto)
                 .collect(Collectors.toList());
     }
+
+//    public List<Cart> mapToCartList(List<CartDto> cartDtoList){
+//        return cartDtoList.stream()
+//                .map(this::mapToCart)
+//                .collect(Collectors.toList());
+//    }
 }
