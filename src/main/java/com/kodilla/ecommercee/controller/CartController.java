@@ -28,7 +28,7 @@ public class CartController {
 
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Void> createCart(@RequestBody CartDto cartDto) {
+    ResponseEntity<Void> createCart(@RequestBody CartDto cartDto) throws Exception {
         Cart cart = cartMapper.mapToCart(cartDto);
         cartService.saveCart(cart);
         return ResponseEntity.ok().build();
