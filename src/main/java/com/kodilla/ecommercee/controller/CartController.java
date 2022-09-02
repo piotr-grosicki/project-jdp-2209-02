@@ -2,6 +2,10 @@ package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.*;
 import com.kodilla.ecommercee.domain.dto.CartDto;
+import com.kodilla.ecommercee.exceptions.CartNotFoundException;
+import com.kodilla.ecommercee.exceptions.OrderNotFoundException;
+import com.kodilla.ecommercee.exceptions.ProductNotFoundException;
+import com.kodilla.ecommercee.exceptions.UserNotFoundException;
 import com.kodilla.ecommercee.mapper.CartMapper;
 import com.kodilla.ecommercee.mapper.ProductMapper;
 import com.kodilla.ecommercee.service.CartService;
@@ -47,18 +51,29 @@ public class CartController {
     }
 
     @DeleteMapping(value = "{cartId}")
-    public ResponseEntity<Void> deleteCart(@PathVariable long cartId) throws Exception {
+    public ResponseEntity<Void> deleteCart(@PathVariable long cartId)  {
         cartService.deleteCart(cartId);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping(value = "{cartId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> putProductIntoCart(@PathVariable long cartId,
-                                                   @RequestBody long productId) throws Exception {
+                                                   @RequestBody long productId) throws ProductNotFoundException, CartNotFoundException {
         Cart cart = cartService.getCart(cartId);
         System.out.println(productService.getProductById(productId));
         cart.getProducts().add(productService.getProductById(productId));
         cartService.saveCart(cart);
         return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping(value = "{cartId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CartDto> updateCart(@RequestBody CartDto cartDto) throws UserNotFoundException, OrderNotFoundException, CartNotFoundException {
+        return ResponseEntity.ok(
+                cartMapper.mapToCartDto(
+                        cartService.updateCart(
+                                cartMapper.mapToCart(cartDto)
+
+                ))
+        );
     }
 }

@@ -15,22 +15,33 @@ import java.util.List;
 public class CartService {
 
     @Autowired
-    CartRepository repository;
+    CartRepository cartRepository;
 
     public List<Cart> getAllCarts() {
-        return repository.findAll();
+        return cartRepository.findAll();
     }
 
-    public Cart getCart(final Long id) throws Exception {
-        return repository.findById(id)
-                .orElseThrow(Exception::new);
+    public Cart getCart(final Long id) throws CartNotFoundException {
+        return cartRepository.findById(id)
+                .orElseThrow(CartNotFoundException::new);
     }
 
     public Cart saveCart(final Cart cart) {
-        return repository.save(cart);
+        return cartRepository.save(cart);
     }
 
     public void deleteCart(final long id) {
-        repository.deleteById(id);
+        cartRepository.deleteById(id);
+    }
+
+    public Cart updateCart(final Cart cart) throws CartNotFoundException {
+        Cart updatedCart = getCart(cart.getId());
+        if (cart.getUser() != null ) {
+            updatedCart.setUser(cart.getUser());
+        }
+        if (cart.getOrder() != null) {
+            updatedCart.setOrder(cart.getOrder());
+        }
+        return cartRepository.save(updatedCart);
     }
 }
