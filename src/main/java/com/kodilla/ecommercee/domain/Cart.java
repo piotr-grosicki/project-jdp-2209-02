@@ -19,13 +19,17 @@ public class Cart {
     @Column(name = "ID", unique = true)
     private long id;
 
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name= "USERS_ID")
+    private User user;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name= "ORDERS_ID")
+    private Order order;
+
     @ManyToMany(cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,
             mappedBy = "carts")
     private List<Product> products;
-
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JoinColumn(name= "USERS_ID")
-    private User user;
 
 }

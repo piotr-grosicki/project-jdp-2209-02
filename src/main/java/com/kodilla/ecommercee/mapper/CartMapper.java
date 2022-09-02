@@ -6,10 +6,14 @@ import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.domain.dto.CartDto;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
+import com.kodilla.ecommercee.exceptions.OrderNotFoundException;
+import com.kodilla.ecommercee.exceptions.UserNotFoundException;
 import com.kodilla.ecommercee.repository.CartRepository;
 import com.kodilla.ecommercee.repository.OrderRepository;
 import com.kodilla.ecommercee.repository.ProductRepository;
 import com.kodilla.ecommercee.repository.UserRepository;
+import com.kodilla.ecommercee.service.OrderDbService;
+import com.kodilla.ecommercee.service.UserDbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +25,7 @@ import java.util.stream.Collectors;
 public class CartMapper {
 
     @Autowired
-    ProductRepository productRepository;
+     ProductRepository productRepository;
 
     @Autowired
     UserRepository userRepository;
@@ -32,6 +36,10 @@ public class CartMapper {
     @Autowired
     ProductMapper productMapper;
 
+    private UserDbService userDbService;
+
+    private OrderDbService orderDbService;
+
     public CartDto mapToCartDto(final Cart cart) {
         return new CartDto(cart.getId(),
                 cart.getUser().getId(),
@@ -39,11 +47,13 @@ public class CartMapper {
                 productMapper.mapToProductDtoList(cart.getProducts()));
     }
 
-    public Cart mapToCart(final CartDto cartDto) {
-        return new Cart(cartDto.getId(),
-                userRepository.findById(cartDto.getUserId()),
-                orderRepository.findById(cartDto.getOrderId()),
-                productMapper.mapToProductList(cartDto.getProductDtoList()));
+    public Cart mapToCart(final CartDto cartDto) throws UserNotFoundException, OrderNotFoundException {
+        return new Cart(
+                cartDto.getId(),
+                userDbService.getUserById(cartDto.getUserId()),
+                orderDbService.getOrder(cartDto.getOrderId()),
+                productMapper.mapToProductList(cartDto.getProductDtoList())
+        );
     }
 
     public List<CartDto> mapToCartDtoList(List<Cart> cartList){
@@ -51,10 +61,4 @@ public class CartMapper {
                 .map(this::mapToCartDto)
                 .collect(Collectors.toList());
     }
-
-//    public List<Cart> mapToCartList(List<CartDto> cartDtoList){
-//        return cartDtoList.stream()
-//                .map(this::mapToCart)
-//                .collect(Collectors.toList());
-//    }
 }
