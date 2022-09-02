@@ -46,10 +46,17 @@ public class CartController {
         return ResponseEntity.ok(cartMapper.mapToCartDto(cartService.getCart(cartId)));
     }
 
+    @DeleteMapping(value = "{cartId}")
+    public ResponseEntity<Void> deleteCart(@PathVariable long cartId) throws Exception {
+        cartService.deleteCart(cartId);
+        return ResponseEntity.ok().build();
+    }
+
     @PutMapping(value = "{cartId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> putProductIntoCart(@PathVariable long cartId,
                                                    @RequestBody long productId) throws Exception {
         Cart cart = cartService.getCart(cartId);
+        System.out.println(productService.getProductById(productId));
         cart.getProducts().add(productService.getProductById(productId));
         cartService.saveCart(cart);
         return ResponseEntity.ok().build();

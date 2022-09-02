@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.service;
 
 
 import com.kodilla.ecommercee.domain.Cart;
+import com.kodilla.ecommercee.exceptions.CartNotFoundException;
 import com.kodilla.ecommercee.repository.CartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,4 +30,7 @@ public class CartService {
         return repository.save(cart);
     }
 
+    public void deleteCart(final long id) {
+        repository.deleteById(id);
+    }
 }
