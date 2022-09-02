@@ -32,12 +32,11 @@ public class CartController {
 
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Void> createCart(@RequestBody CartDto cartDto) throws Exception {
+    ResponseEntity<Void> createCart(@RequestBody CartDto cartDto) throws UserNotFoundException, OrderNotFoundException {
         Cart cart = cartMapper.mapToCart(cartDto);
         cartService.saveCart(cart);
         return ResponseEntity.ok().build();
     }
-
 
     @GetMapping
     public ResponseEntity<List<CartDto>> getCarts() {
@@ -46,7 +45,7 @@ public class CartController {
     }
 
     @GetMapping(value = "{cartId}")
-    public ResponseEntity<CartDto> getCart(@PathVariable long cartId) throws Exception {
+    public ResponseEntity<CartDto> getCart(@PathVariable long cartId) throws CartNotFoundException {
         return ResponseEntity.ok(cartMapper.mapToCartDto(cartService.getCart(cartId)));
     }
 
@@ -57,23 +56,19 @@ public class CartController {
     }
 
     @PutMapping(value = "{cartId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> putProductIntoCart(@PathVariable long cartId,
-                                                   @RequestBody long productId) throws ProductNotFoundException, CartNotFoundException {
+    public ResponseEntity<Void> putProductIntoCart(@PathVariable long cartId, @RequestBody long productId)
+            throws ProductNotFoundException, CartNotFoundException {
         Cart cart = cartService.getCart(cartId);
-        System.out.println(productService.getProductById(productId));
         cart.getProducts().add(productService.getProductById(productId));
         cartService.saveCart(cart);
         return ResponseEntity.ok().build();
     }
 
     @PatchMapping(value = "{cartId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CartDto> updateCart(@RequestBody CartDto cartDto) throws UserNotFoundException, OrderNotFoundException, CartNotFoundException {
-        return ResponseEntity.ok(
-                cartMapper.mapToCartDto(
-                        cartService.updateCart(
-                                cartMapper.mapToCart(cartDto)
-
-                ))
-        );
+    public ResponseEntity<CartDto> updateCart(@RequestBody CartDto cartDto)
+            throws UserNotFoundException, OrderNotFoundException, CartNotFoundException {
+        Cart cart = cartMapper.mapToCart(cartDto);
+        cartService.updateCart(cart);
+        return ResponseEntity.ok().build();
     }
 }

@@ -20,4 +20,9 @@ public class CartDto {
     private Long orderId;
     private List<ProductDto> productDtoList;
 
+    public CartDto(long id, long userId, long orderId) {
+        this.id = id;
+        this.userId = userId;
+        this.orderId = orderId;
+    }
 }

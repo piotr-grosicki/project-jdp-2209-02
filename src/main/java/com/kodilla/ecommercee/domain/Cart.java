@@ -34,4 +34,9 @@ public class Cart {
     @ManyToMany(cascade = CascadeType.ALL,mappedBy = "carts")
     private List<Product> products;
 
+    public Cart(Long id, User user, Order order) {
+        this.id = id;
+        this.user = user;
+        this.order = order;
+    }
 }

@@ -39,15 +39,13 @@ public class CartMapper {
     public CartDto mapToCartDto(final Cart cart) {
         return new CartDto(cart.getId(),
                 cart.getUser().getId(),
-                cart.getOrder().getId(),
-                productMapper.mapToProductDtoList(cart.getProducts()));
+                cart.getOrder().getId());
     }
 
     public Cart mapToCart(final CartDto cartDto) throws UserNotFoundException, OrderNotFoundException {
         return new Cart(cartDto.getId(),
                 userService.getUserById(cartDto.getUserId()),
-                orderDbService.getOrder(cartDto.getOrderId()),
-                productMapper.mapToProductList(cartDto.getProductDtoList()));
+                orderDbService.getOrder(cartDto.getOrderId()));
     }
 
     public List<CartDto> mapToCartDtoList(final List<Cart> cartList){
