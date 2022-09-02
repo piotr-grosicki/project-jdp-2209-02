@@ -18,7 +18,7 @@ public class ProductMapper {
 
     public Product mapToProduct(final ProductDto productDto) throws GroupNotFoundException {
         return new Product(
-                groupService.getGroup(productDto.getGroupId()),
+                groupService.getGroupById(productDto.getGroupId()),
                 productDto.getProductName(),
                 productDto.getProductDescription(),
                 productDto.getProductPrice()
@@ -27,7 +27,7 @@ public class ProductMapper {
     public Product mapToProductUpdate(final ProductDto productDto) throws GroupNotFoundException {
         return new Product(
                 productDto.getProductId(),
-                groupService.getGroup(productDto.getGroupId()),
+                groupService.getGroupById(productDto.getGroupId()),
                 productDto.getProductName(),
                 productDto.getProductDescription(),
                 productDto.getProductPrice()
@@ -52,8 +52,13 @@ public class ProductMapper {
 
     public List<Product> mapToProductList(final List<ProductDto> productDtoList) {
         return productDtoList.stream()
-                .map(this::mapToProduct)
+                .map(productDto -> {
+                    try {
+                        return mapToProduct(productDto);
+                    } catch (GroupNotFoundException e) {
+                        return null;
+                    }
+                })
                 .collect(Collectors.toList());
     }
-
 }

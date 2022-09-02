@@ -6,7 +6,9 @@ import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.domain.dto.CartDto;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
+import com.kodilla.ecommercee.exceptions.GroupNotFoundException;
 import com.kodilla.ecommercee.exceptions.OrderNotFoundException;
+import com.kodilla.ecommercee.exceptions.UserNotFoundException;
 import com.kodilla.ecommercee.repository.CartRepository;
 import com.kodilla.ecommercee.repository.OrderRepository;
 import com.kodilla.ecommercee.repository.ProductRepository;
@@ -23,8 +25,6 @@ import java.util.stream.Collectors;
 @Service
 public class CartMapper {
 
-    @Autowired
-    ProductRepository productRepository;
 
     @Autowired
     UserService userService;
@@ -42,22 +42,28 @@ public class CartMapper {
                 productMapper.mapToProductDtoList(cart.getProducts()));
     }
 
-    public Cart mapToCart(final CartDto cartDto) throws Exception {
+    public Cart mapToCart(final CartDto cartDto) throws UserNotFoundException, OrderNotFoundException {
         return new Cart(cartDto.getId(),
                 userService.getUserById(cartDto.getUserId()),
                 orderDbService.getOrder(cartDto.getOrderId()),
                 productMapper.mapToProductList(cartDto.getProductDtoList()));
     }
 
-    public List<CartDto> mapToCartDtoList(List<Cart> cartList){
+    public List<CartDto> mapToCartDtoList(final List<Cart> cartList){
         return cartList.stream()
                 .map(this::mapToCartDto)
                 .collect(Collectors.toList());
     }
 
-//    public List<Cart> mapToCartList(List<CartDto> cartDtoList){
-//        return cartDtoList.stream()
-//                .map(this::mapToCart)
-//                .collect(Collectors.toList());
-//    }
+    public List<Cart> mapToCartList(final List<CartDto> cartDtoList) {
+        return cartDtoList.stream()
+                .map(cartDto -> {
+                    try {
+                        return mapToCart(cartDto);
+                        } catch (Exception e ) {
+                        return null;
+                    }
+                })
+                .collect(Collectors.toList());
+    }
 }

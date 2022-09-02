@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,5 +16,5 @@ public class UserDto {
     private String mail;
     private String address;
     private boolean isBlocked;
-    private long userKey;
+    private UUID userKey;
 }
