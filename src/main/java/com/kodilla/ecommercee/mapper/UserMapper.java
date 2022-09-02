@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserMapper {
 
-
-
     public User mapToUser(UserDto userDto){
         return new User(
                 userDto.getId(),
