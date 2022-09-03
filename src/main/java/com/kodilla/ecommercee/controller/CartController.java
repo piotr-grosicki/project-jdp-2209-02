@@ -8,7 +8,7 @@ import com.kodilla.ecommercee.exceptions.ProductNotFoundException;
 import com.kodilla.ecommercee.exceptions.UserNotFoundException;
 import com.kodilla.ecommercee.mapper.CartMapper;
 import com.kodilla.ecommercee.mapper.ProductMapper;
-import com.kodilla.ecommercee.service.CartService;
+import com.kodilla.ecommercee.service.CartDbService;
 import com.kodilla.ecommercee.service.ProductDbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -22,7 +22,7 @@ import java.util.List;
 public class CartController {
 
     @Autowired
-    CartService cartService;
+    CartDbService cartService;
     @Autowired
     CartMapper cartMapper;
     @Autowired
