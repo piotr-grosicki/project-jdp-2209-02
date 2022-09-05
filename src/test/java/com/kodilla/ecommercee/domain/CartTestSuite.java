@@ -96,7 +96,7 @@ class CartTestSuite {
     @Test
     void shouldFindProductListAndUserInCart() {
         //Given
-        User user = new User("user_login","user_mail","user_address",false,null,null);
+        User user = new User("login", "mail@mail.com", "city", "00-000", "street", "st.000", 15L, false, null, null);
         userRepository.save(user);
 
         Group group = new Group("Grupa 1", "opis_grupy");
@@ -132,7 +132,7 @@ class CartTestSuite {
     @Test
     void deleteProductsInCartTest() {
         //Given
-        User user = new User("user_login","user_mail","user_address",false,null,null);
+        User user = new User("login", "mail@mail.com", "city", "00-000", "street", "st.000", 15L, false, null, null);
         userRepository.save(user);
 
         Group group = new Group("Grupa 1", "opis_grupy");
@@ -169,7 +169,7 @@ class CartTestSuite {
     @Test
     void shouldDeleteCartAndLeftUserAndProducts() {
         //Given
-        User user = new User("user_login","user_mail","user_address",false,null,null);
+        User user = new User("login", "mail@mail.com", "city", "00-000", "street", "st.000", 15L, false, null, null);
         userRepository.save(user);
 
         Group group = new Group( "Grupa 1", "opis_grupy");
