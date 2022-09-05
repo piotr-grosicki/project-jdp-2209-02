@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.*;
 import com.kodilla.ecommercee.domain.dto.CartDto;
+import com.kodilla.ecommercee.domain.dto.OrderDto;
 import com.kodilla.ecommercee.exceptions.CartNotFoundException;
 import com.kodilla.ecommercee.exceptions.OrderNotFoundException;
 import com.kodilla.ecommercee.exceptions.ProductNotFoundException;
@@ -64,11 +65,14 @@ public class CartController {
         return ResponseEntity.ok().build();
     }
 
-    @PatchMapping(value = "{cartId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CartDto> updateCart(@RequestBody CartDto cartDto)
-            throws UserNotFoundException, OrderNotFoundException, CartNotFoundException {
-        Cart cart = cartMapper.mapToCart(cartDto);
-        cartService.updateCart(cart);
-        return ResponseEntity.ok().build();
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CartDto> updateCart(@RequestBody CartDto cartDto) throws UserNotFoundException, OrderNotFoundException {
+        return ResponseEntity.ok(
+                cartMapper.mapToCartDto(
+                        cartService.saveCart(
+                                cartMapper.mapToCart(cartDto)
+                        )
+                )
+        );
     }
 }
