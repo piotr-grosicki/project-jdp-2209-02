@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -16,7 +19,7 @@ public class OrderTestSuite {
     @Test
     public void createOrder() {
         //Given
-        Order order = new Order();
+        Order order = new Order(LocalDate.now(), true, OrderStatus.IN_DELIVERY, new BigDecimal("21.5"));
         //When
         orderRepository.save(order);
         //Then
@@ -29,8 +32,8 @@ public class OrderTestSuite {
     @Test
     public void getAllOrders() {
         //Given
-        Order order1 = new Order();
-        Order order2 = new Order();
+        Order order1 = new Order(LocalDate.now(), true, OrderStatus.IN_DELIVERY, new BigDecimal("21.5"));
+        Order order2 = new Order(LocalDate.now(), true, OrderStatus.IN_DELIVERY, new BigDecimal("21.5"));
         //When
         orderRepository.save(order1);
         orderRepository.save(order2);
@@ -44,7 +47,7 @@ public class OrderTestSuite {
     @Test
     public void getOrderById() {
         //Given
-        Order order = new Order();
+        Order order = new Order(LocalDate.now(), true, OrderStatus.IN_DELIVERY, new BigDecimal("21.5"));
         //When
         orderRepository.save(order);
         //Then

@@ -1,7 +1,10 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.*;
+import com.kodilla.ecommercee.domain.Cart;
+import com.kodilla.ecommercee.domain.OrderStatus;
 import com.kodilla.ecommercee.domain.dto.CartDto;
+import com.kodilla.ecommercee.domain.dto.OrderDto;
+import com.kodilla.ecommercee.domain.dto.ProductDto;
 import com.kodilla.ecommercee.exceptions.CartNotFoundException;
 import com.kodilla.ecommercee.exceptions.OrderNotFoundException;
 import com.kodilla.ecommercee.exceptions.ProductNotFoundException;
@@ -15,6 +18,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -70,5 +75,14 @@ public class CartController {
         Cart cart = cartMapper.mapToCart(cartDto);
         cartService.updateCart(cart);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping(value = "createOrder/{cartId}")
+    public void createOrderFromCart(@PathVariable long cartId) {
+        List<ProductDto> productDtoList = new ArrayList<>();
+        ProductDto productDto = new ProductDto(1L, 1L, "productName", "productDescription", new BigDecimal(1000));
+        CartDto cartDto = new CartDto(cartId, 1L, 1L, productDtoList);
+        cartDto.getProductDtoList().add(productDto);
+        new OrderDto(1L, 1L , 1L ,true, OrderStatus.IN_DELIVERY, new BigDecimal(22.10),productDtoList);
     }
 }

@@ -15,7 +15,11 @@ public class UserDto {
     private long id;
     private String login;
     private String mail;
-    private String address;
+    private String city;
+    private String postalNumber;
+    private String street;
+    private String streetNumber;
+    private long houseNumber;
     private boolean isBlocked;
     private UUID userKey;
 }
