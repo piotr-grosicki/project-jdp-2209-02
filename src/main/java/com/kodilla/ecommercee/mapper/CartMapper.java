@@ -1,26 +1,15 @@
 package com.kodilla.ecommercee.mapper;
 
 import com.kodilla.ecommercee.domain.Cart;
-import com.kodilla.ecommercee.domain.Order;
-import com.kodilla.ecommercee.domain.Product;
-import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.domain.dto.CartDto;
-import com.kodilla.ecommercee.domain.dto.ProductDto;
-import com.kodilla.ecommercee.exceptions.CartNotFoundException;
-import com.kodilla.ecommercee.exceptions.GroupNotFoundException;
 import com.kodilla.ecommercee.exceptions.OrderNotFoundException;
 import com.kodilla.ecommercee.exceptions.UserNotFoundException;
-import com.kodilla.ecommercee.repository.CartRepository;
-import com.kodilla.ecommercee.repository.OrderRepository;
-import com.kodilla.ecommercee.repository.ProductRepository;
-import com.kodilla.ecommercee.repository.UserRepository;
 import com.kodilla.ecommercee.service.OrderDbService;
-import com.kodilla.ecommercee.service.UserService;
+import com.kodilla.ecommercee.service.UserDbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,7 +17,7 @@ public class CartMapper {
 
 
     @Autowired
-    UserService userService;
+    UserDbService userDbService;
 
     @Autowired
     OrderDbService orderDbService;
@@ -44,7 +33,7 @@ public class CartMapper {
 
     public Cart mapToCart(final CartDto cartDto) throws UserNotFoundException, OrderNotFoundException {
         return new Cart(cartDto.getId(),
-                userService.getUserById(cartDto.getUserId()),
+                userDbService.getUserById(cartDto.getUserId()),
                 orderDbService.getOrder(cartDto.getOrderId()));
     }
 
