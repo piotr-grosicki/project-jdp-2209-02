@@ -34,8 +34,9 @@ public class Order {
     private boolean isPaid;
 
    // @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "ORDER_STATUS")
-    private String orderStatus;
+    private OrderStatus orderStatus;
 
   //  @NotNull
     @Column(name = "TOTAL_PRICE")
@@ -45,14 +46,14 @@ public class Order {
     @JoinColumn(name= "CART_ID")
     private Cart cart;
 
-    public Order(LocalDate orderDate, boolean isPaid, String orderStatus, BigDecimal totalPrice) {
+    public Order(LocalDate orderDate, boolean isPaid, OrderStatus orderStatus, BigDecimal totalPrice) {
         this.orderDate = orderDate;
         this.isPaid = isPaid;
         this.orderStatus = orderStatus;
         this.totalPrice = totalPrice;
     }
 
-    public Order(User user, boolean isPaid, String orderStatus, BigDecimal totalPrice) {
+    public Order(User user, boolean isPaid, OrderStatus orderStatus, BigDecimal totalPrice) {
         this.user = user;
         this.orderDate = LocalDate.now();
         this.isPaid = isPaid;
