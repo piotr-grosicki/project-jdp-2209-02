@@ -36,7 +36,7 @@ public class UserTestSuite {
     @Test
     void testUserSave(){
         //given
-        User user = new User(0L, "testUserSave", "user@domain.com", "city","street","streetNumber 17A", 10, false, null);
+        User user = new User(0L, "testUserSave", "user@domain.com", "city","02-022","street","streetNumber 17A", 10, false, null);
 
         System.out.println("user:" + user);
         //when
@@ -58,9 +58,9 @@ public class UserTestSuite {
     @Test
     void testUserSaveMultiple(){
         //given
-        User user1 = new User(0L, "testUserSave", "user@domain.com", "city","street","streetNumber 17A", 10, false, null);
-        User user2 = new User(0L, "testUserSave", "user@domain.com", "city","street","streetNumber 17A", 10, false, null);
-        User user3 = new User(0L, "testUserSave", "user@domain.com", "city","street","streetNumber 17A", 10, false, null);
+        User user1 = new User(0L, "testUserSave", "user@domain.com", "city","02-022","street","streetNumber 17A", 10, false, null);
+        User user2 = new User(0L, "testUserSave", "user@domain.com", "city","02-022","street","streetNumber 17A", 10, false, null);
+        User user3 = new User(0L, "testUserSave", "user@domain.com", "city","02-022","street","streetNumber 17A", 10, false, null);
 
         //when
         User savedUser1 = userRepository.save(user1);
@@ -86,7 +86,7 @@ public class UserTestSuite {
 
     @Test
     void testUserOrder(){
-        User user = new User(1L, "testUser", "user@user.com", "city","street","streetNumber 17A", 10, false, null);
+        User user = new User(1L, "testUser", "user@user.com", "city","02-022","street","streetNumber 17A", 10, false, null);
         Order order = new Order(user, false, "W przygotowaniu", new BigDecimal(22.11));
 
         long userIds = order.getUser().getId();
@@ -109,7 +109,7 @@ public class UserTestSuite {
     @Test
     void testUserUpdate(){
         //given
-        User user = new User(0L, "testUserSave", "user@domain.com", "city","street","streetNumber 17A", 10, false, null);
+        User user = new User(0L, "testUserSave", "user@domain.com", "city","02-022","street","streetNumber 17A", 10, false, null);
 
         //when
         User savedUser1 = userRepository.save(user);
@@ -129,7 +129,7 @@ public class UserTestSuite {
     @Test
     void testUserSaveNullLogin(){
         //given
-        User user = new User(0L, "testUserSave", "user@domain.com", "city","street","streetNumber 17A", 10, false, null);
+        User user = new User(0L, "testUserSave", "user@domain.com", "city","02-022","street","streetNumber 17A", 10, false, null);
         user.setLogin(null);
 
         try {
@@ -142,7 +142,7 @@ public class UserTestSuite {
     @Test
     void testUserSaveNullMail(){
         //given
-        User user = new User(0L, "testUserSave", "user@domain.com", "city","street","streetNumber 17A", 10, false, null);
+        User user = new User(0L, "testUserSave", "user@domain.com", "city","02-022","street","streetNumber 17A", 10, false, null);
         user.setMail(null);
 
         try {
@@ -155,7 +155,7 @@ public class UserTestSuite {
     @Test
     void testUserSaveNullAddress(){
         //given
-        User user = new User(0L, "testUserSave", "user@domain.com", "city","street","streetNumber 17A", 10, false, null);
+        User user = new User(0L, "testUserSave", "user@domain.com", "city","02-022","street","streetNumber 17A", 10, false, null);
         user.setCity(null);
 
         try {
@@ -168,7 +168,7 @@ public class UserTestSuite {
     @Test
     void testDeleteCartLeaveUser(){
         //given
-        User user = new User(0L, "testUserSave", "user@domain.com", "city","street","streetNumber 17A", 10, false, null);
+        User user = new User(0L, "testUserSave", "user@domain.com", "city","02-022","street","streetNumber 17A", 10, false, null);
         user = userRepository.save(user);
 
         Cart cart = new Cart(0L, new ArrayList<>(), user);

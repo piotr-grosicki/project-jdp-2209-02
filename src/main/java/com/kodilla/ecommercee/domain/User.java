@@ -30,6 +30,9 @@ public class User {
     @Column(name = "CITY")
     private String city;
     @NotNull
+    @Column(name = "POSTAL_NO")
+    private String postalNumber;
+    @NotNull
     @Column(name = "STREET")
     private String street;
     @NotNull
@@ -52,11 +55,12 @@ public class User {
     )
     private List<Order> orders;
 
-    public User(long id, String login, String mail, String city, String street, String streetNumber, long houseNumber, boolean isBlocked, UUID userKey) {
+    public User(long id, String login, String mail, String city, String postalNumber, String street, String streetNumber, long houseNumber, boolean isBlocked, UUID userKey) {
         this.id = id;
         this.login = login;
         this.mail = mail;
         this.city = city;
+        this.postalNumber=postalNumber;
         this.street = street;
         this.streetNumber = streetNumber;
         this.houseNumber = houseNumber;
