@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -26,9 +25,9 @@ public class OrderDbService {
         return orderRepository.findById(orderId).orElseThrow(OrderNotFoundException::new);
     }
 
-    public Order createOrder(final Order order) {
+    public void createOrder(final Order order) {
         order.setOrderDate(LocalDate.now());
-        return orderRepository.save(order);
+        orderRepository.save(order);
     }
 
     public void deleteOrder(final Long orderId) throws OrderNotFoundException {

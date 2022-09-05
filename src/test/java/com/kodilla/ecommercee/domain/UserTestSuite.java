@@ -36,7 +36,7 @@ public class UserTestSuite {
     @Test
     void testUserSave(){
         //given
-        User user = new User(0L, "testUserSave", "user@domain.com", "address", false, null);
+        User user = new User(0L, "testUserSave", "user@domain.com", "city","02-022","street","streetNumber 17A", 10, false, null);
 
         System.out.println("user:" + user);
         //when
@@ -48,7 +48,7 @@ public class UserTestSuite {
 
         assertEquals(user.getLogin(), userRepository.findById(savedUser.getId()).get().getLogin());
         assertEquals(user.getMail(), userRepository.findById(savedUser.getId()).get().getMail());
-        assertEquals(user.getAddress(), userRepository.findById(savedUser.getId()).get().getAddress());
+        assertEquals(user.getCity(), userRepository.findById(savedUser.getId()).get().getCity());
         assertEquals(user.isBlocked(), userRepository.findById(savedUser.getId()).get().isBlocked());
 
         //cleanup
@@ -58,9 +58,9 @@ public class UserTestSuite {
     @Test
     void testUserSaveMultiple(){
         //given
-        User user1 = new User(0L, "testUserSave1", "user1@domain.com", "address1", false, null);
-        User user2 = new User(0L, "testUserSave2", "user2@domain.com", "address2", false, null);
-        User user3 = new User(0L, "testUserSave3", "user3@domain.com", "address3", false, null);
+        User user1 = new User(0L, "testUserSave", "user@domain.com", "city","02-022","street","streetNumber 17A", 10, false, null);
+        User user2 = new User(0L, "testUserSave", "user@domain.com", "city","02-022","street","streetNumber 17A", 10, false, null);
+        User user3 = new User(0L, "testUserSave", "user@domain.com", "city","02-022","street","streetNumber 17A", 10, false, null);
 
         //when
         User savedUser1 = userRepository.save(user1);
@@ -86,13 +86,14 @@ public class UserTestSuite {
 
     @Test
     void testUserOrder(){
-        User user = new User(1L, "testUser", "user@user.com", "addressOfUser", false, null);
-        Order order = new Order(user, false, "W przygotowaniu", new BigDecimal(22.11));
+
+        User user = new User(1L, "testUser", "user@user.com", "city","02-022","street","streetNumber 17A", 10, false, null);
+        Order order = new Order(user, false, OrderStatus.IN_DELIVERY, new BigDecimal(22.11));
 
         long userIds = order.getUser().getId();
         String userLogin = order.getUser().getLogin();
         String userMail = order.getUser().getMail();
-        String userAddress = order.getUser().getAddress();
+        String city = order.getUser().getCity();
         Boolean userIsBlocked = order.getUser().isBlocked();
         UUID userUserKey = order.getUser().getUserKey();
 
@@ -100,21 +101,21 @@ public class UserTestSuite {
                 () -> assertEquals(1L, userIds),
                 () -> assertEquals("testUser", userLogin),
                 () -> assertEquals("user@user.com", userMail),
-                () -> assertEquals("addressOfUser" ,userAddress),
+                () -> assertEquals("city" ,city),
                 () -> assertFalse(userIsBlocked),
-                () -> assertEquals(null, userUserKey)
+                () -> assertNull(userUserKey)
         );
     }
 
     @Test
     void testUserUpdate(){
         //given
-        User user = new User(0L, "testUserUpdate", "user@domain.com", "address", false, null);
+        User user = new User(0L, "testUserSave", "user@domain.com", "city","02-022","street","streetNumber 17A", 10, false, null);
 
         //when
         User savedUser1 = userRepository.save(user);
         System.out.println("update1: " + savedUser1);
-        savedUser1.setAddress("address2");
+        savedUser1.setCity("warsaw");
         User savedUser2 = userRepository.save(savedUser1);
         System.out.println("update2: " + savedUser2);
 
@@ -129,7 +130,7 @@ public class UserTestSuite {
     @Test
     void testUserSaveNullLogin(){
         //given
-        User user = new User(0L, "login", "user@domain.com", "testUserNullLogin", false, null);
+        User user = new User(0L, "testUserSave", "user@domain.com", "city","02-022","street","streetNumber 17A", 10, false, null);
         user.setLogin(null);
 
         try {
@@ -142,7 +143,7 @@ public class UserTestSuite {
     @Test
     void testUserSaveNullMail(){
         //given
-        User user = new User(0L, "testUserNullMail", "user@domain.com", "address", false, null);
+        User user = new User(0L, "testUserSave", "user@domain.com", "city","02-022","street","streetNumber 17A", 10, false, null);
         user.setMail(null);
 
         try {
@@ -155,8 +156,8 @@ public class UserTestSuite {
     @Test
     void testUserSaveNullAddress(){
         //given
-        User user = new User(0L, "testUserNullAddress", "user@domain.com", "address", false, null);
-        user.setAddress(null);
+        User user = new User(0L, "testUserSave", "user@domain.com", "city","02-022","street","streetNumber 17A", 10, false, null);
+        user.setCity(null);
 
         try {
             userRepository.save(user);
@@ -168,7 +169,7 @@ public class UserTestSuite {
     @Test
     void testDeleteCartLeaveUser(){
         //given
-        User user = new User(0L, "login", "user@domain.com", "address", false, null);
+        User user = new User(0L, "testUserSave", "user@domain.com", "city","02-022","street","streetNumber 17A", 10, false, null);
         user = userRepository.save(user);
 
         Cart cart = new Cart(0L, new ArrayList<>(), user);
