@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.domain.OrderStatus;
 import com.kodilla.ecommercee.domain.dto.CartDto;
 import com.kodilla.ecommercee.domain.dto.OrderDto;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
@@ -48,6 +49,6 @@ public class CartController {
         ProductDto productDto = new ProductDto(1L, 1L, "productName", "productDescription", new BigDecimal(1000));
         CartDto cartDto = new CartDto(cartId, 1L, 1L, productDtoList);
         cartDto.getProductDtoList().add(productDto);
-        new OrderDto(1L, 1L , 1L ,true,"status", new BigDecimal(22.10),productDtoList);
+        new OrderDto(1L, 1L , 1L ,true, OrderStatus.IN_DELIVERY, new BigDecimal(22.10),productDtoList);
     }
 }

@@ -87,7 +87,7 @@ public class UserTestSuite {
     @Test
     void testUserOrder(){
         User user = new User(1L, "testUser", "user@user.com", "addressOfUser", false, null);
-        Order order = new Order(user, false, "W przygotowaniu", new BigDecimal(22.11));
+        Order order = new Order(user, false, OrderStatus.IN_DELIVERY, new BigDecimal(22.11));
 
         long userIds = order.getUser().getId();
         String userLogin = order.getUser().getLogin();
