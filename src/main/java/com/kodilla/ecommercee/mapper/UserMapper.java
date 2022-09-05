@@ -12,7 +12,10 @@ public class UserMapper {
                 userDto.getId(),
                 userDto.getLogin(),
                 userDto.getMail(),
-                userDto.getAddress(),
+                userDto.getCity(),
+                userDto.getStreet(),
+                userDto.getStreetNumber(),
+                userDto.getHouseNumber(),
                 userDto.isBlocked(),
                 userDto.getUserKey()
         );
@@ -23,7 +26,10 @@ public class UserMapper {
                 user.getId(),
                 user.getLogin(),
                 user.getMail(),
-                user.getAddress(),
+                user.getCity(),
+                user.getStreet(),
+                user.getStreetNumber(),
+                user.getHouseNumber(),
                 user.isBlocked(),
                 user.getUserKey()
         );
