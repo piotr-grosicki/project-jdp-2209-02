@@ -2,7 +2,11 @@ package com.kodilla.ecommercee.service;
 
 
 import com.kodilla.ecommercee.domain.Cart;
+import com.kodilla.ecommercee.domain.Product;
+import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.exceptions.CartNotFoundException;
+import com.kodilla.ecommercee.exceptions.ProductNotFoundException;
+import com.kodilla.ecommercee.exceptions.UserNotFoundException;
 import com.kodilla.ecommercee.repository.CartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +42,6 @@ public class CartDbService {
         Cart updatedCart = getCart(cart.getId());
         if (cart.getUser() != null ) {
             updatedCart.setUser(cart.getUser());
-        }
-        if (cart.getOrder() != null) {
-            updatedCart.setOrder(cart.getOrder());
         }
         return cartRepository.save(updatedCart);
     }

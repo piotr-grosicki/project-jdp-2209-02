@@ -40,7 +40,7 @@ public class Product {
     @JoinTable(
             name = "PRODUCTS_CARTS",
             joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "ID")}
+            inverseJoinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")}
     )
     private List<Cart> carts;
 

@@ -1,12 +1,10 @@
 package com.kodilla.ecommercee.domain;
 
-import com.kodilla.ecommercee.domain.dto.ProductDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @NoArgsConstructor
@@ -18,25 +16,17 @@ public class Cart {
 
     @Id
     @GeneratedValue
-    @NotNull
-    @Column(name = "ID", unique = true)
+    @Column(name = "CART_ID", unique = true)
     private long id;
 
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name= "USERS_ID")
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinColumn(name= "USER_ID")
     private User user;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name= "ORDERS_ID")
-    private Order order;
 
     @ManyToMany(cascade = CascadeType.ALL,mappedBy = "carts")
     private List<Product> products;
 
-    public Cart(Long id, User user, Order order) {
-        this.id = id;
+    public Cart(User user) {
         this.user = user;
-        this.order = order;
     }
 }
