@@ -36,7 +36,7 @@ public class Product {
     @Column(name = "PRICE")
     private BigDecimal price;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
             name = "PRODUCTS_CARTS",
             joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
