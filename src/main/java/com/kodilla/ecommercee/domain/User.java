@@ -27,8 +27,19 @@ public class User {
     @Column(name = "mail")
     private String mail;
     @NotNull
-    @Column(name = "ADDRESS")
-    private String address;
+    @Column(name = "CITY")
+    private String city;
+    @NotNull
+    @Column(name = "POSTAL_NO")
+    private String postalNumber;
+    @NotNull
+    @Column(name = "STREET")
+    private String street;
+    @NotNull
+    @Column(name = "STREET_NO")
+    private String streetNumber;
+    @Column(name = "HOUSE_NO")
+    private long houseNumber;
     @NotNull
     @Column(name = "IS_BLOCKED")
     private boolean isBlocked;
@@ -44,11 +55,15 @@ public class User {
     )
     private List<Order> orders;
 
-    public User(Long id, String login, String mail, String address, boolean isBlocked, UUID userKey) {
+    public User(long id, String login, String mail, String city, String postalNumber, String street, String streetNumber, long houseNumber, boolean isBlocked, UUID userKey) {
         this.id = id;
         this.login = login;
         this.mail = mail;
-        this.address = address;
+        this.city = city;
+        this.postalNumber=postalNumber;
+        this.street = street;
+        this.streetNumber = streetNumber;
+        this.houseNumber = houseNumber;
         this.isBlocked = isBlocked;
         this.userKey = userKey;
     }
