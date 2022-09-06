@@ -18,7 +18,7 @@ public class Cart {
     @Column(name = "ID", unique = true)
     private long id;
 
-    @ManyToMany(cascade = CascadeType.ALL,
+    @ManyToMany(
             fetch = FetchType.EAGER,
             mappedBy = "carts")
     private List<Product> products;

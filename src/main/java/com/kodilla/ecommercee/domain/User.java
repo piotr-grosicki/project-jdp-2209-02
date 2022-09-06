@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 import java.util.List;
@@ -17,14 +18,14 @@ import java.util.UUID;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@NotNull
     @Column(name = "ID", unique = true)
     private long id;
     @NotNull
     @Column(name = "LOGIN")
     private String login;
     @NotNull
-    @Column(name = "mail")
+    @Email
+    @Column(name = "MAIL")
     private String mail;
     @NotNull
     @Column(name = "CITY")
@@ -50,7 +51,6 @@ public class User {
     @OneToMany(
             targetEntity = Order.class,
             mappedBy = "user",
-            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     private List<Order> orders;
@@ -66,5 +66,18 @@ public class User {
         this.houseNumber = houseNumber;
         this.isBlocked = isBlocked;
         this.userKey = userKey;
+    }
+
+    public User(String login, String mail, String city, String postalNumber, String street, String streetNumber, long houseNumber, boolean isBlocked, UUID userKey, LocalTime lastLogin) {
+        this.login = login;
+        this.mail = mail;
+        this.city = city;
+        this.postalNumber = postalNumber;
+        this.street = street;
+        this.streetNumber = streetNumber;
+        this.houseNumber = houseNumber;
+        this.isBlocked = isBlocked;
+        this.userKey = userKey;
+        this.lastLogin = lastLogin;
     }
 }
