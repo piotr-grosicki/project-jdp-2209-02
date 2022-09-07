@@ -20,34 +20,45 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", unique = true)
     private long id;
+
     @NotNull
     @Column(name = "LOGIN")
     private String login;
+
     @NotNull
     @Email
     @Column(name = "MAIL")
     private String mail;
-    @NotNull
+
+    //@NotNull
     @Column(name = "CITY")
     private String city;
-    @NotNull
+
+    //@NotNull
     @Column(name = "POSTAL_NO")
     private String postalNumber;
-    @NotNull
+
+    //@NotNull
     @Column(name = "STREET")
     private String street;
-    @NotNull
+
+    //@NotNull
     @Column(name = "STREET_NO")
     private String streetNumber;
+
     @Column(name = "HOUSE_NO")
     private long houseNumber;
-    @NotNull
+
+    //@NotNull
     @Column(name = "IS_BLOCKED")
     private boolean isBlocked;
+
     @Column(name = "USER_KEY")
     private UUID userKey;
+
     @Column(name = "LAST_LOGIN")
     private LocalTime lastLogin;
+
     @OneToMany(
             targetEntity = Order.class,
             mappedBy = "user",
@@ -60,7 +71,7 @@ public class User {
         this.login = login;
         this.mail = mail;
         this.city = city;
-        this.postalNumber=postalNumber;
+        this.postalNumber = postalNumber;
         this.street = street;
         this.streetNumber = streetNumber;
         this.houseNumber = houseNumber;

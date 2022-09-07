@@ -3,6 +3,7 @@ import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.exceptions.GroupNotFoundException;
 import com.kodilla.ecommercee.repository.GroupRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GroupDbService {
 
+    @Autowired
     private final GroupRepository groupRepository;
 
     public List<Group> getAllGroups() {

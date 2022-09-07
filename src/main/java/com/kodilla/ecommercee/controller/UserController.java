@@ -20,8 +20,10 @@ public class UserController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto) throws UserExistsException {
+        System.out.println("create");
         return ResponseEntity.ok(userDbService.createUser(userDto));
     }
+
     @PutMapping(value = "/changeStatus/{userId}")
     public ResponseEntity<UserDto> changeUserStatus(@PathVariable long userId) throws UserNotFoundException {
         return ResponseEntity.ok(userDbService.changeUserStatus(userId));
