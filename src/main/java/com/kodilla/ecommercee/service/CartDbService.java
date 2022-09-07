@@ -62,16 +62,16 @@ public class CartDbService {
         return cartMapper.mapToCartDto(cart);
     }
 
-    public OrderDto createOrderFromCart(final long cartId) throws CartNotFoundException {
-        Cart cart = cartRepository.findById(cartId).orElseThrow(CartNotFoundException::new);
-        List<Product> productsList = cart.getProducts();
-        BigDecimal totalPrice = new BigDecimal(0);
-        for (Product product : productsList) {
-            totalPrice = totalPrice.add(product.getPrice());
-        }
-        Order order = new Order(cart.getUser(), false, OrderStatus.PROCESSING, totalPrice);
-        return orderDbService.createOrder(order);
-    }
+//    public OrderDto createOrderFromCart(final long cartId) throws CartNotFoundException {
+//        Cart cart = cartRepository.findById(cartId).orElseThrow(CartNotFoundException::new);
+//        List<Product> productsList = cart.getProducts();
+//        BigDecimal totalPrice = new BigDecimal(0);
+//        for (Product product : productsList) {
+//            totalPrice = totalPrice.add(product.getPrice());
+//        }
+//        Order order = new Order(cart.getUser(), false, OrderStatus.PROCESSING, totalPrice);
+//        return orderDbService.createOrder(orderDto);
+//    }
 
     public Cart getCart(final Long id) throws CartNotFoundException {
         return cartRepository.findById(id)

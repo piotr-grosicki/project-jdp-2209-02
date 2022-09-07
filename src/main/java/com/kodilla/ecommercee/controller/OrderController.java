@@ -20,36 +20,25 @@ import java.util.List;
 public class OrderController {
 
     private final OrderDbService orderDbService;
-    private final OrderMapper orderMapper;
 
     @GetMapping
     public ResponseEntity<List<OrderDto>> getOrders() {
-        List<Order> orders = orderDbService.getAllOrders();
-        return ResponseEntity.ok(orderMapper.mapToOrderDtoList(orders));
+        return ResponseEntity.ok(orderDbService.getAllOrders());
     }
 
     @GetMapping(value = "{orderId}")
     public ResponseEntity<OrderDto> getOrder(@PathVariable long orderId) throws OrderNotFoundException, CartNotFoundException {
-        Order order = orderDbService.getOrder(orderId);
-        return ResponseEntity.ok(orderMapper.mapToOrderDto(order));
+        return ResponseEntity.ok(orderDbService.getOrder(orderId));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createOrder(@RequestBody OrderDto orderDto) throws UserNotFoundException, CartNotFoundException {
-        Order order = orderMapper.mapToOrder(orderDto);
-        orderDbService.createOrder(order);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<OrderDto> createOrder(@RequestBody OrderDto orderDto) throws UserNotFoundException, CartNotFoundException {
+        return ResponseEntity.ok(orderDbService.createOrder(orderDto));
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<OrderDto> updateOrder(@RequestBody OrderDto orderDto) throws UserNotFoundException, CartNotFoundException, OrderNotFoundException {
-        return ResponseEntity.ok(
-                orderMapper.mapToOrderDto(
-                        orderDbService.saveOrder(
-                                orderMapper.mapToOrder(orderDto)
-                        )
-                )
-        );
+        return ResponseEntity.ok(orderDbService.updateOrder(orderDto));
     }
 
     @DeleteMapping(value = "{orderId}")
