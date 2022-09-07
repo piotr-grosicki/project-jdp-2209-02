@@ -22,16 +22,7 @@ public class UserTestSuite {
     private UserRepository userRepository;
 
     @Autowired
-    private OrderRepository orderRepository;
-
-    @Autowired
     private CartRepository cartRepository;
-
-    @Autowired
-    private ProductRepository productRepository;
-
-    @Autowired
-    private GroupRepository groupRepository;
 
     @Test
     void testUserSave(){
@@ -172,7 +163,7 @@ public class UserTestSuite {
         User user = new User(0L, "testUserSave", "user@domain.com", "city","02-022","street","streetNumber 17A", 10, false, null);
         user = userRepository.save(user);
 
-        Cart cart = new Cart(0L, new ArrayList<>(), user);
+        Cart cart = new Cart(0L, user, new ArrayList<>());
         cart = cartRepository.save(cart);
 
         //when

@@ -10,8 +10,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CartDto {
-    private long id;
-    private long userId;
-    private long orderId;
-    private List<ProductDto> productDtoList;
+
+    private Long id;
+    private Long userId;
+    private List<ProductDto> productsList;
+
 }
