@@ -42,7 +42,7 @@ public class Order {
     @Column(name = "TOTAL_PRICE")
     private BigDecimal totalPrice;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "CART_ID")
     private Cart cart;
 
@@ -53,8 +53,9 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    public Order(User user, boolean isPaid, OrderStatus orderStatus, BigDecimal totalPrice) {
+    public Order(User user, Cart cart, boolean isPaid, OrderStatus orderStatus, BigDecimal totalPrice) {
         this.user = user;
+        this.cart = cart;
         this.orderDate = LocalDate.now();
         this.isPaid = isPaid;
         this.orderStatus = orderStatus;
