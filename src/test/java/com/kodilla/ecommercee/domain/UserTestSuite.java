@@ -9,6 +9,7 @@ import javax.validation.ConstraintViolationException;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
@@ -24,6 +25,9 @@ public class UserTestSuite {
 
     @Autowired
     private CartRepository cartRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Test
     void testUserSave() {
@@ -182,21 +186,18 @@ public class UserTestSuite {
     void testDeleteOrderLeaveUser() {
         //given
         User user = new User(0L, "testUserSave", "user@domain.com", "city", "02-022", "street", "streetNumber 17A", 10, false, null);
-        user = userRepository.save(user);
-
-        Order order = new Order(user, false, OrderStatus.PROCESSING, BigDecimal.ZERO);
-        order = orderRepository.save(order);
-        user.getOrders().add(order);
-
+        userRepository.save(user);
+        Cart cart = new Cart(0L, user, new ArrayList<>());
+        cartRepository.save(cart);
+        Order order = new Order(user, cart, false, OrderStatus.PROCESSING, BigDecimal.ZERO);
+        orderRepository.save(order);
         //when
         orderRepository.delete(order);
-
         //then
         assertTrue(userRepository.existsById(user.getId()));
-
         //cleanup
-        user.getOrders().remove(order);
-        userRepository.delete(user);
+        cartRepository.deleteById(cart.getId());
+        userRepository.deleteById(user.getId());
     }
 
 }

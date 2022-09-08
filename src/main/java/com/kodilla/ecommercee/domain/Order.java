@@ -42,7 +42,7 @@ public class Order {
     @Column(name = "TOTAL_PRICE")
     private BigDecimal totalPrice;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "CART_ID")
     private Cart cart;
 
