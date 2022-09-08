@@ -29,10 +29,10 @@ public class CartController {
 
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Void> createCart(@RequestBody CartDto cartDto) throws UserNotFoundException {
+    ResponseEntity<String> createCart(@RequestBody CartDto cartDto) throws UserNotFoundException {
         Cart cart = cartMapper.mapToNewCart(cartDto);
         cartDbService.saveCart(cart);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("CartId: " + cart.getId());
     }
 
     @GetMapping(value = "{cartId}")
