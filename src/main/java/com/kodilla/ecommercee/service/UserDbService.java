@@ -34,7 +34,6 @@ public class UserDbService {
         }
         User user = getUserById(userId);
         user.setUserKey(uuid);
-        //set validity time - current + 1H
         user = userRepository.save(user);
         return userMapper.mapToUserDto(user);
     }
