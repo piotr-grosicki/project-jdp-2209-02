@@ -32,6 +32,5 @@ public class Cart {
 
     public Cart(User user) {
         this.user = user;
-        this.products = new ArrayList<>();
     }
 }
