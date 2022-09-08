@@ -58,7 +58,7 @@ public class CartDbService {
         for (Product product: productsList) {
             totalPrice = totalPrice.add(product.getPrice());
         }
-        Order order = new Order(cart.getUser(),false, OrderStatus.PROCESSING,totalPrice);
+        Order order = new Order(cart.getUser(),cart,false, OrderStatus.PROCESSING,totalPrice);
         orderDbService.createOrder(order);
         return order;
     }

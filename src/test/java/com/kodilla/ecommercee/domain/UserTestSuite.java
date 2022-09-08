@@ -79,7 +79,8 @@ public class UserTestSuite {
     void testUserOrder(){
 
         User user = new User(1L, "testUser", "user@user.com", "city","02-022","street","streetNumber 17A", 10, false, null);
-        Order order = new Order(user, false, OrderStatus.IN_DELIVERY, new BigDecimal(22.11));
+        Cart cart = new Cart(0L, user, new ArrayList<>());
+        Order order = new Order(user, cart, false, OrderStatus.IN_DELIVERY, new BigDecimal(22.11));
 
         long userIds = order.getUser().getId();
         String userLogin = order.getUser().getLogin();
