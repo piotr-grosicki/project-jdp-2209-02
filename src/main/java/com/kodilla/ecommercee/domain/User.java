@@ -9,7 +9,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -66,7 +65,6 @@ public class User {
             fetch = FetchType.LAZY
     )
     private List<Order> orders;
-
     public User(long id, String login, String mail, String city, String postalNumber, String street, String streetNumber, long houseNumber, boolean isBlocked, UUID userKey) {
         this.id = id;
         this.login = login;
@@ -80,7 +78,6 @@ public class User {
         this.userKey = userKey;
         this.orders = new ArrayList<>();
     }
-
     public User(String login, String mail, String city, String postalNumber, String street, String streetNumber, long houseNumber, boolean isBlocked, UUID userKey, LocalTime lastLogin) {
         this.login = login;
         this.mail = mail;

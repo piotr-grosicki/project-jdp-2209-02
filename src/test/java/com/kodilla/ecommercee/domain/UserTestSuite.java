@@ -9,6 +9,7 @@ import javax.validation.ConstraintViolationException;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
@@ -23,16 +24,10 @@ public class UserTestSuite {
     private UserRepository userRepository;
 
     @Autowired
-    private OrderRepository orderRepository;
-
-    @Autowired
     private CartRepository cartRepository;
 
     @Autowired
-    private ProductRepository productRepository;
-
-    @Autowired
-    private GroupRepository groupRepository;
+    private OrderRepository orderRepository;
 
     @Test
     void testUserSave() {
@@ -88,8 +83,9 @@ public class UserTestSuite {
     @Test
     void testUserOrder() {
 
-        User user = new User(1L, "testUser", "user@user.com", "city", "02-022", "street", "streetNumber 17A", 10, false, null);
-        Order order = new Order(user, false, OrderStatus.IN_DELIVERY, new BigDecimal(22.11));
+        User user = new User(1L, "testUser", "user@user.com", "city","02-022","street","streetNumber 17A", 10, false, null);
+        Cart cart = new Cart(0L, user, new ArrayList<>());
+        Order order = new Order(user, cart, false, OrderStatus.IN_DELIVERY, new BigDecimal(22.11));
 
         long userIds = order.getUser().getId();
         String userLogin = order.getUser().getLogin();
@@ -173,7 +169,7 @@ public class UserTestSuite {
         User user = new User(0L, "testUserSave", "user@domain.com", "city", "02-022", "street", "streetNumber 17A", 10, false, null);
         user = userRepository.save(user);
 
-        Cart cart = new Cart(0L, new ArrayList<>(), user);
+        Cart cart = new Cart(0L, user, new ArrayList<>());
         cart = cartRepository.save(cart);
 
         //when
@@ -190,21 +186,18 @@ public class UserTestSuite {
     void testDeleteOrderLeaveUser() {
         //given
         User user = new User(0L, "testUserSave", "user@domain.com", "city", "02-022", "street", "streetNumber 17A", 10, false, null);
-        user = userRepository.save(user);
-
-        Order order = new Order(user, false, OrderStatus.PROCESSING, BigDecimal.ZERO);
-        order = orderRepository.save(order);
-        user.getOrders().add(order);
-
+        userRepository.save(user);
+        Cart cart = new Cart(0L, user, new ArrayList<>());
+        cartRepository.save(cart);
+        Order order = new Order(user, cart, false, OrderStatus.PROCESSING, BigDecimal.ZERO);
+        orderRepository.save(order);
         //when
         orderRepository.delete(order);
-
         //then
         assertTrue(userRepository.existsById(user.getId()));
-
         //cleanup
-        user.getOrders().remove(order);
-        userRepository.delete(user);
+        cartRepository.deleteById(cart.getId());
+        userRepository.deleteById(user.getId());
     }
 
 }
