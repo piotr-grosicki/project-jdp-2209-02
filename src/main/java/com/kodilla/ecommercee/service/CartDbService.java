@@ -1,5 +1,4 @@
 package com.kodilla.ecommercee.service;
-
 import com.kodilla.ecommercee.domain.Cart;
 import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.OrderStatus;
@@ -11,14 +10,11 @@ import com.kodilla.ecommercee.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class CartDbService {
-
     @Autowired
     private CartRepository cartRepository;
     @Autowired

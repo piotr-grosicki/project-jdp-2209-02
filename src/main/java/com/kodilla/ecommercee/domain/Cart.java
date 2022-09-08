@@ -22,9 +22,12 @@ public class Cart {
     @JoinColumn(name= "USER_ID")
     private User user;
 
-    @ManyToMany(
-            fetch = FetchType.EAGER,
-            mappedBy = "carts")
+    @ManyToMany
+    @JoinTable(
+            name = "PRODUCTS_CARTS",
+            joinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")}
+    )
     private List<Product> products;
 
     public Cart(User user) {
