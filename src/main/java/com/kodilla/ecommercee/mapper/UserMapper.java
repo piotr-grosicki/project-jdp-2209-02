@@ -16,7 +16,7 @@ public class UserMapper {
                 userDto.getPostalNumber(),
                 userDto.getStreet(),
                 userDto.getStreetNumber(),
-                userDto.getHouseNumber(),
+                userDto.getApartmentNumber(),
                 userDto.isBlocked(),
                 userDto.getUserKey()
         );
@@ -31,7 +31,7 @@ public class UserMapper {
                 user.getPostalNumber(),
                 user.getStreet(),
                 user.getStreetNumber(),
-                user.getHouseNumber(),
+                user.getApartmentNumber(),
                 user.isBlocked(),
                 user.getUserKey()
         );

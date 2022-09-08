@@ -43,11 +43,11 @@ public class User {
     private String street;
 
     @NotNull
-    @Column(name = "STREET_NO")
+    @Column(name = "HOUSE_NO")
     private String streetNumber;
 
-    @Column(name = "HOUSE_NO")
-    private long houseNumber;
+    @Column(name = "APARTMENT_NO")
+    private long apartmentNumber;
 
     @NotNull
     @Column(name = "IS_BLOCKED")
@@ -65,7 +65,7 @@ public class User {
             fetch = FetchType.LAZY
     )
     private List<Order> orders;
-    public User(long id, String login, String mail, String city, String postalNumber, String street, String streetNumber, long houseNumber, boolean isBlocked, UUID userKey) {
+    public User(long id, String login, String mail, String city, String postalNumber, String street, String streetNumber, long apartmentNumber, boolean isBlocked, UUID userKey) {
         this.id = id;
         this.login = login;
         this.mail = mail;
@@ -73,19 +73,19 @@ public class User {
         this.postalNumber=postalNumber;
         this.street = street;
         this.streetNumber = streetNumber;
-        this.houseNumber = houseNumber;
+        this.apartmentNumber = apartmentNumber;
         this.isBlocked = isBlocked;
         this.userKey = userKey;
         this.orders = new ArrayList<>();
     }
-    public User(String login, String mail, String city, String postalNumber, String street, String streetNumber, long houseNumber, boolean isBlocked, UUID userKey, LocalTime lastLogin) {
+    public User(String login, String mail, String city, String postalNumber, String street, String streetNumber, long apartmentNumber, boolean isBlocked, UUID userKey, LocalTime lastLogin) {
         this.login = login;
         this.mail = mail;
         this.city = city;
         this.postalNumber = postalNumber;
         this.street = street;
         this.streetNumber = streetNumber;
-        this.houseNumber = houseNumber;
+        this.apartmentNumber = apartmentNumber;
         this.isBlocked = isBlocked;
         this.userKey = userKey;
         this.lastLogin = lastLogin;
