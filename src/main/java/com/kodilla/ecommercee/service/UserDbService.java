@@ -44,7 +44,7 @@ public class UserDbService {
         return userRepository.findByUserKey(uuid).isPresent();
     }
     public UserDto changeUserStatus(Long userId) throws UserNotFoundException {
-        User user = getUserById(userId);
+        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
         user.setBlocked(!user.isBlocked());
         userRepository.save(user);
         return userMapper.mapToUserDto(user);
