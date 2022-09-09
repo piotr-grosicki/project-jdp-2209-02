@@ -32,4 +32,9 @@ public class Cart {
     public Cart(User user) {
         this.user = user;
     }
+
+    public Cart(User user, List<Product> products) {
+        this.user = user;
+        this.products = products;
+    }
 }
