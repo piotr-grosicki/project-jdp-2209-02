@@ -22,17 +22,6 @@ public class OrderDto {
     private BigDecimal totalPrice;
     private List<ProductDto> productDtoList;
 
-    public OrderDto(long id, long userId, long cartId, boolean isPaid, OrderStatus orderStatus, BigDecimal totalPrice, List<ProductDto> productDtoList) {
-        this.id = id;
-        this.userId = userId;
-        this.cartId = cartId;
-        this.orderDate = LocalDate.now();
-        this.isPaid = isPaid;
-        this.orderStatus = orderStatus;
-        this.totalPrice = totalPrice;
-        this.productDtoList = productDtoList;
-    }
-
     public boolean getIsPaid() {
         return isPaid;
     }

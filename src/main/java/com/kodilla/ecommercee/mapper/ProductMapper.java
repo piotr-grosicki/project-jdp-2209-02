@@ -51,15 +51,4 @@ public class ProductMapper {
                 .collect(Collectors.toList());
     }
 
-    public List<Product> mapToProductList(final List<ProductDto> productDtoList) {
-        return productDtoList.stream()
-                .map(productDto -> {
-                    try {
-                        return mapToProduct(productDto);
-                    } catch (GroupNotFoundException e) {
-                        return null;
-                    }
-                })
-                .collect(Collectors.toList());
-    }
 }
