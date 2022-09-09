@@ -1,4 +1,5 @@
 package com.kodilla.ecommercee.service;
+
 import com.kodilla.ecommercee.domain.Cart;
 import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.OrderStatus;
@@ -10,17 +11,23 @@ import com.kodilla.ecommercee.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CartDbService {
-    @Autowired
     private CartRepository cartRepository;
-    @Autowired
     private ProductRepository productRepository;
-    @Autowired
     private OrderDbService orderDbService;
+
+    @Autowired
+    public CartDbService(CartRepository cartRepository, ProductRepository productRepository, OrderDbService orderDbService) {
+        this.cartRepository = cartRepository;
+        this.productRepository = productRepository;
+        this.orderDbService = orderDbService;
+    }
 
     public void saveCart(final Cart cart) {
         cartRepository.save(cart);
@@ -51,10 +58,10 @@ public class CartDbService {
         Cart cart = cartRepository.findById(cartId).orElseThrow(CartNotFoundException::new);
         List<Product> productsList = cart.getProducts();
         BigDecimal totalPrice = new BigDecimal(0);
-        for (Product product: productsList) {
+        for (Product product : productsList) {
             totalPrice = totalPrice.add(product.getPrice());
         }
-        Order order = new Order(cart.getUser(),cart,false, OrderStatus.PROCESSING,totalPrice);
+        Order order = new Order(cart.getUser(), cart, false, OrderStatus.PROCESSING, totalPrice);
         orderDbService.createOrder(order);
         return order;
     }
@@ -65,8 +72,8 @@ public class CartDbService {
     }
 
     public void updateCart(final Cart cart) throws CartNotFoundException {
-        Cart updatedCart = getCart(cart.getId());
-        if (cart.getUser() != null ) {
+        Cart updatedCart = cartRepository.findById(cart.getId()).orElseThrow(CartNotFoundException::new);
+        if (cart.getUser() != null) {
             updatedCart.setUser(cart.getUser());
         }
         cartRepository.save(updatedCart);

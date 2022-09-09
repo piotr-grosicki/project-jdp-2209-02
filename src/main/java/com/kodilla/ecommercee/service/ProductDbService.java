@@ -13,8 +13,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductDbService {
 
-    @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    public ProductDbService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
@@ -36,7 +40,7 @@ public class ProductDbService {
     }
 
     public Product updateProduct(final Product product) throws ProductNotFoundException {
-        Product productToUpdate = getProductById(product.getId());
+        Product productToUpdate = productRepository.findById(product.getId()).orElseThrow(ProductNotFoundException::new);
         if (product.getGroup() != null) {
             productToUpdate.setGroup(product.getGroup());
         }
