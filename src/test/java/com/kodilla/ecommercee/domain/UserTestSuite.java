@@ -65,7 +65,9 @@ public class UserTestSuite {
         System.out.println("user3:" + savedUser3);
 
         //then
-        assertEquals(3, userRepository.findAll().size());
+        assertTrue(userRepository.existsById(savedUser1.getId()));
+        assertTrue(userRepository.existsById(savedUser2.getId()));
+        assertTrue(userRepository.existsById(savedUser3.getId()));
 
         System.out.println(savedUser1);
         System.out.println(savedUser2);
@@ -114,7 +116,7 @@ public class UserTestSuite {
         System.out.println("update2: " + savedUser2);
 
         //then
-        assertEquals(1, userRepository.findAll().size());
+        assertTrue(userRepository.existsById(savedUser2.getId()));
         assertEquals(savedUser1, savedUser2);
 
         //cleanup
@@ -173,7 +175,7 @@ public class UserTestSuite {
         cartRepository.delete(cart);
 
         //then
-        assertEquals(1, userRepository.findAll().size());
+        assertTrue(userRepository.existsById(user.getId()));
 
         //cleanup
         userRepository.delete(user);
