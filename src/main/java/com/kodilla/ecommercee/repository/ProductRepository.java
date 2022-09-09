@@ -25,6 +25,4 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
     @Override
     void deleteById(Long productId);
-
-    List<Product> findByGroup(Group group);
 }
