@@ -74,7 +74,8 @@ public class OrderTestSuite {
 
     @Test
     void testDeleteProductFromTheList(){
-        User user = new User("User1", "user@gmail.com", "Warsaw", "00-231", "Mariacka", "2", 22L, false, new UUID(22222,3), LocalTime.now());
+        User user = new User("User1", "user@gmail.com", "Warsaw",
+                "00-231", "Mariacka", "2", 22L, false, new UUID(22222,3), LocalTime.now());
         userRepository.save(user);
         Group group = new Group("Food", "Food for pets");
         groupRepository.save(group);
