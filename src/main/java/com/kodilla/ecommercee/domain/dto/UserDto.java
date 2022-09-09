@@ -3,7 +3,6 @@ package com.kodilla.ecommercee.domain.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.UUID;
 
@@ -19,7 +18,7 @@ public class UserDto {
     private String postalNumber;
     private String street;
     private String streetNumber;
-    private long houseNumber;
+    private long apartmentNumber;
     private boolean isBlocked;
     private UUID userKey;
 }

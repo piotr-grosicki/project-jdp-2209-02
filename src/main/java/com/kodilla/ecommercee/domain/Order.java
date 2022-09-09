@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -17,7 +16,6 @@ public class Order {
 
     @Id
     @GeneratedValue
-    //@NotNull
     @Column(name = "ID", unique = true)
     private long id;
 
@@ -25,20 +23,16 @@ public class Order {
     @JoinColumn(name = "USER_ID")
     private User user;
 
-   // @NotNull
     @Column(name = "ORDER_DATE")
     private LocalDate orderDate;
 
-   // @NotNull
     @Column(name = "IS_PAID")
     private boolean isPaid;
 
-   // @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "ORDER_STATUS")
     private OrderStatus orderStatus;
 
-  //  @NotNull
     @Column(name = "TOTAL_PRICE")
     private BigDecimal totalPrice;
 
