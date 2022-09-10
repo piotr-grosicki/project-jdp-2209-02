@@ -22,8 +22,9 @@ public class UserController {
     public ResponseEntity<UserDto> changeUserStatus(@PathVariable long userId) throws UserNotFoundException {
         return ResponseEntity.ok(userDbService.changeUserStatus(userId));
     }
-    @PutMapping(value = "/createKey/{userId}")
-    public ResponseEntity<UUID> createUserKey(@PathVariable long userId) throws UserNotFoundException {
-        return ResponseEntity.ok(userDbService.createUserKey(userId).getUserKey());
+
+    @PutMapping(value = "/createKey", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UUID> createUserKey2(@RequestBody UserDto userDto) throws UserNotFoundException {
+        return ResponseEntity.ok(userDbService.createUserKey(userDto).getUserKey());
     }
 }
