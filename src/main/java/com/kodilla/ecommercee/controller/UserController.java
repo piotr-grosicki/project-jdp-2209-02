@@ -38,8 +38,8 @@ public class UserController {
     @ApiOperation(value = "generate random key",
             response = Root.class,
             notes = "this method generate random key that is valid for one hour after providing correct user data. If not found user in repository, returns BAD REQUEST (400).")
-    @PutMapping(value = "/createKey/{userId}")
-    public ResponseEntity<UUID> createUserKey(@PathVariable long userId) throws UserNotFoundException {
-        return ResponseEntity.ok(userDbService.createUserKey(userId).getUserKey());
+    @PutMapping(value = "/createKey", consumes = MediaType.APPLICATION_JSON_VALUE)
+        public ResponseEntity<UUID> createUserKey(@RequestBody UserDto userDto) throws UserNotFoundException {
+            return ResponseEntity.ok(userDbService.createUserKey(userDto).getUserKey());
     }
 }
