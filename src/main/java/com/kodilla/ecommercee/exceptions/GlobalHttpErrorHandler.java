@@ -40,9 +40,4 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handlerUserLoginExistsException(UserExistsException exception) {
         return new ResponseEntity<>("User already exists", HttpStatus.BAD_REQUEST);
     }
-
-    @ExceptionHandler(UserLoginFailedException.class)
-    public ResponseEntity<Object> handlerUserLoginFailedException(UserLoginFailedException exception) {
-        return new ResponseEntity<>("User login failed", HttpStatus.BAD_REQUEST);
-    }
 }
